@@ -1,13 +1,9 @@
-import { Button, Text, useColorMode } from "@chakra-ui/react";
+import { Some } from "./components/Some";
 
 function App() {
-	const { toggleColorMode } = useColorMode();
 	return (
 		<div className="App">
-			<header className="App-header">
-				<Text>Hello PWA</Text>
-				<Button onClick={toggleColorMode}>Toggle</Button>
-			</header>
+			<Some></Some>
 		</div>
 	);
 }
