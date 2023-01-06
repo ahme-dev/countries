@@ -1,3 +1,4 @@
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
 	Box,
 	Button,
@@ -8,20 +9,24 @@ import {
 	Image,
 	SimpleGrid,
 	Spinner,
+	Text,
 	useColorModeValue,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFlagsStore } from "../data/flags";
 
 export function Flags() {
-	// state
-	const { data, fetch } = useFlagsStore();
+	// local
+	const [selected, setSelected] = useState<number>(-1);
+
+	// zustand
+	const { data, dataIndex, check, checkResult, fetch, next } = useFlagsStore();
 
 	useEffect(() => {
 		fetch();
 	}, []);
 
-	if (!data.answer) return <Spinner size={"xl"} m={4}></Spinner>;
+	if (!data[dataIndex]) return <Spinner size={"xl"} m={4}></Spinner>;
 
 	return (
 		<Card
@@ -34,13 +39,18 @@ export function Flags() {
 			alignItems="center"
 			overflow="hidden"
 		>
-			<Box bg={useColorModeValue("gray.400", "gray.800")} m={4} rounded={"xl"}>
+			<Box
+				onClick={next}
+				bg={useColorModeValue("gray.400", "gray.800")}
+				m={4}
+				rounded={"xl"}
+			>
 				<Image
 					m={4}
 					maxW={"xs"}
 					fallback={<Spinner size={"xl"} m={4}></Spinner>}
 					objectFit="cover"
-					src={data.flag}
+					src={data[dataIndex].flag}
 					alt={`Unknown Flag`}
 				/>
 			</Box>
@@ -48,10 +58,35 @@ export function Flags() {
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
-						{data.variants.map((el, i) => (
-							<Button key={i}>{el}</Button>
-						))}
+						{data[dataIndex].variants.map((el, i) =>
+							selected === i ? (
+								<Button
+									onClick={() => setSelected(-1)}
+									key={i}
+									borderColor={"purple.400"}
+									borderWidth={2}
+								>
+									{el}
+								</Button>
+							) : (
+								<Button
+									borderColor={"transparent"}
+									borderWidth={2}
+									onClick={() => setSelected(i)}
+									key={i}
+								>
+									{el}
+								</Button>
+							),
+						)}
 					</SimpleGrid>
+					<Text>{JSON.stringify(checkResult)}</Text>
+					<Button
+						onClick={() => check(selected)}
+						leftIcon={<CheckCircleIcon />}
+					>
+						Answer
+					</Button>
 				</Flex>
 			</CardBody>
 		</Card>
