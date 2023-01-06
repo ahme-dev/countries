@@ -1,17 +1,27 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Box, Container, Flex, Grid } from "@chakra-ui/react";
+import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
 import { Some } from "./components/Some";
 
 function App() {
 	return (
-		<Container
-			maxW="container.lg"
-			minH={"96"}
-			// bg={"tomato"}
-		>
-			<Flex direction={"column"} gap={4} py={2}>
-				<Nav></Nav>
-				<Some></Some>
+		<Container maxW="container.lg">
+			<Flex
+				sx={{ minHeight: "100vh" }}
+				direction={"column"}
+				h={"full"}
+				justifyContent={"space-between"}
+				gap={4}
+				py={2}
+			>
+				{/* Header */}
+				<Nav />
+				{/* Main */}
+				<Grid>
+					<Some />
+				</Grid>
+				{/* Footer */}
+				<Info />
 			</Flex>
 		</Container>
 	);
