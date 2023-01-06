@@ -12,7 +12,7 @@ import {
 	useColorModeValue,
 	useToast,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFlagsStore } from "../data/flags";
 
 export function Flags() {
