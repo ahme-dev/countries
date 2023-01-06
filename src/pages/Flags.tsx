@@ -9,7 +9,6 @@ import {
 	Image,
 	SimpleGrid,
 	Spinner,
-	Text,
 	useColorModeValue,
 	useToast,
 } from "@chakra-ui/react";
