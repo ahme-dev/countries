@@ -8,6 +8,7 @@ import {
 	MenuItem,
 	MenuList,
 	useColorMode,
+	Button,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon, ChatIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
@@ -17,18 +18,13 @@ export function Nav() {
 	return (
 		<Flex direction={"row"} justifyContent={"space-between"}>
 			{/* Left */}
-			<Center gap={2}>
-				<Menu>
-					<MenuButton as={IconButton} icon={<ChevronDownIcon />} />
-					<MenuList>
-						<MenuItem>Guess Capitals</MenuItem>
-						<MenuItem>Guess Flags</MenuItem>
-					</MenuList>
-				</Menu>
-
+			<Center gap={4}>
 				<Text fontWeight={"bold"} fontSize={"2xl"}>
 					Countries
 				</Text>
+
+				<Button>Capitals</Button>
+				<Button fontWeight={"bold"}>Flags</Button>
 			</Center>
 
 			{/* Right */}

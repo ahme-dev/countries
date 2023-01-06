@@ -17,7 +17,7 @@ function App() {
 				{/* Header */}
 				<Nav />
 				{/* Main */}
-				<Grid>
+				<Grid alignItems={"center"} justifyContent={"center"}>
 					<Some />
 				</Grid>
 				{/* Footer */}
