@@ -31,7 +31,8 @@ export function Flags() {
 	} = useFlagsStore();
 
 	useEffect(() => {
-		fetch();
+		console.log(dataIndex);
+		if (dataIndex === 0) fetch();
 	}, []);
 
 	if (!data[dataIndex]) return <Spinner size={"xl"} m={4}></Spinner>;
@@ -49,7 +50,7 @@ export function Flags() {
 		>
 			<Box
 				onClick={next}
-				bg={useColorModeValue("gray.400", "gray.800")}
+				bg={useColorModeValue("gray.100", "gray.800")}
 				m={4}
 				rounded={"xl"}
 			>
