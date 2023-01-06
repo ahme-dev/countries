@@ -23,7 +23,6 @@ import {
 	SunIcon,
 	ChatIcon,
 	SmallCloseIcon,
-	SettingsIcon,
 	HamburgerIcon,
 } from "@chakra-ui/icons";
 
