@@ -1,5 +1,4 @@
 import {
-	Box,
 	Button,
 	ButtonGroup,
 	Card,
@@ -7,8 +6,6 @@ import {
 	Flex,
 	Heading,
 	Image,
-	Skeleton,
-	SkeletonText,
 	Spinner,
 	Text,
 	useColorModeValue,
