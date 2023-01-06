@@ -51,7 +51,7 @@ export const useFlagsStore = create<FlagsStore>()(
 
 				// else increase by one
 				set((state) => {
-					return { dataIndex: state.dataIndex + 1 };
+					return { selected: -1, dataIndex: state.dataIndex + 1 };
 				});
 			},
 
