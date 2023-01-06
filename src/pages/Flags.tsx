@@ -18,10 +18,17 @@ import { useFlagsStore } from "../data/flags";
 export function Flags() {
 	const toast = useToast();
 
-	// local
-	const [selected, setSelected] = useState<number>(-1);
 	// zustand
-	const { data, dataIndex, check, checkResult, fetch, next } = useFlagsStore();
+	const {
+		data,
+		dataIndex,
+		selected,
+		changeSelected,
+		check,
+		checkResult,
+		fetch,
+		next,
+	} = useFlagsStore();
 
 	useEffect(() => {
 		fetch();
@@ -59,32 +66,21 @@ export function Flags() {
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
-						{data[dataIndex].variants.map((el, i) =>
-							selected === i ? (
-								<Button
-									onClick={() => setSelected(-1)}
-									key={i}
-									borderColor={"purple.400"}
-									borderWidth={2}
-								>
-									{el}
-								</Button>
-							) : (
-								<Button
-									borderColor={"transparent"}
-									borderWidth={2}
-									onClick={() => setSelected(i)}
-									key={i}
-								>
-									{el}
-								</Button>
-							),
-						)}
+						{data[dataIndex].variants.map((el, i) => (
+							<Button
+								onClick={() => changeSelected(i)}
+								key={i}
+								borderColor={selected === i ? "purple.400" : "transparent"}
+								borderWidth={selected === i ? 2 : 0}
+							>
+								{el}
+							</Button>
+						))}
 					</SimpleGrid>
 					<Button
 						onClick={() => {
 							if (selected === -1) return;
-							check(selected);
+							check();
 							toast({
 								title: `Answer was ${checkResult ? "correct" : "incorrect"}`,
 								status: checkResult ? "success" : "error",

@@ -9,7 +9,9 @@ interface FlagsData {
 interface FlagsStore {
 	dataIndex: number;
 	data: FlagsData[];
-	check: (choiceNum: number) => void;
+	selected: number;
+	changeSelected: (num: number) => void;
+	check: () => void;
 	checkResult: boolean;
 	next: () => void;
 	fetch: () => void;
@@ -18,6 +20,22 @@ interface FlagsStore {
 export const useFlagsStore = create<FlagsStore>((set, get) => ({
 	dataIndex: 0,
 	data: [{ country: "", flag: "", variants: [""], answer: "" }],
+
+	selected: -1,
+	changeSelected: (num: number) => {
+		// if already selected unselect
+		if (get().selected === num) return set({ selected: -1 });
+
+		set({ selected: num });
+	},
+
+	check: () => {
+		const wasCorrect =
+			get().data[get().dataIndex].answer ===
+			get().data[get().dataIndex].variants[get().selected];
+
+		set({ checkResult: wasCorrect });
+	},
 	checkResult: false,
 
 	next: async () => {
@@ -31,14 +49,6 @@ export const useFlagsStore = create<FlagsStore>((set, get) => ({
 		set((state) => {
 			return { dataIndex: state.dataIndex + 1 };
 		});
-	},
-
-	check: (choiceNum: number) => {
-		const wasCorrect =
-			get().data[get().dataIndex].answer ===
-			get().data[get().dataIndex].variants[choiceNum];
-
-		set({ checkResult: wasCorrect });
 	},
 
 	fetch: async () => {
