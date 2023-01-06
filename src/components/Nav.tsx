@@ -97,10 +97,13 @@ function MobileMenu() {
 
 					<DrawerBody>
 						<Flex h={"full"} direction={"column"} gap={4}>
-							<Button variant={"outline"}>Capitals</Button>
-							<Button variant={"outline"} fontWeight={"bold"}>
-								Flags
-							</Button>
+							{["Capitals", "Flags"].map((el, i) => (
+								<Link key={i} to={"/" + el.toLowerCase()}>
+									<Button variant={"outline"} fontWeight={"bold"}>
+										{el}
+									</Button>
+								</Link>
+							))}
 						</Flex>
 					</DrawerBody>
 
