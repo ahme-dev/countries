@@ -1,18 +1,10 @@
-import { RepeatIcon } from "@chakra-ui/icons";
 import {
 	Button,
-	ButtonGroup,
 	Card,
 	CardBody,
-	CardFooter,
-	CircularProgress,
-	Divider,
 	Flex,
 	Heading,
-	IconButton,
 	Image,
-	SimpleGrid,
-	Stack,
 	Text,
 } from "@chakra-ui/react";
 import { useBearStore } from "../data/capitals";
