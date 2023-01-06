@@ -1,4 +1,4 @@
-import { CheckCircleIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
@@ -11,6 +11,13 @@ import {
 	Spinner,
 	useColorModeValue,
 	useToast,
+	IconButton,
+	Popover,
+	PopoverTrigger,
+	PopoverContent,
+	PopoverArrow,
+	PopoverHeader,
+	PopoverBody,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useFlagsStore } from "../data/flags";
@@ -77,22 +84,42 @@ export function Flags() {
 							</Button>
 						))}
 					</SimpleGrid>
-					<Button
-						onClick={() => {
-							if (selected === -1) return;
-							check();
-							toast({
-								title: `Answer was ${checkResult ? "correct" : "incorrect"}`,
-								status: checkResult ? "success" : "error",
-								duration: 3000,
-								variant: "solid",
-							});
-							next();
-						}}
-						leftIcon={<CheckCircleIcon />}
-					>
-						Answer
-					</Button>
+					<Flex justifyContent={"center"} gap={2}>
+						<Popover isLazy>
+							<PopoverTrigger>
+								<IconButton aria-label="Previous Answer Button">
+									<ArrowBackIcon />
+								</IconButton>
+							</PopoverTrigger>
+							<PopoverContent>
+								<PopoverArrow />
+								<PopoverHeader>
+									Your answer was {checkResult ? "Correct" : "Incorrect"}
+								</PopoverHeader>
+								<PopoverBody>
+									Are you sure you want to have that milkshake?
+								</PopoverBody>
+							</PopoverContent>
+						</Popover>
+
+						<Button
+							w={"full"}
+							onClick={() => {
+								if (selected === -1) return;
+								check();
+								toast({
+									title: `Answer was ${checkResult ? "correct" : "incorrect"}`,
+									status: checkResult ? "success" : "error",
+									duration: 3000,
+									variant: "solid",
+								});
+								next();
+							}}
+							leftIcon={<CheckCircleIcon />}
+						>
+							Answer
+						</Button>
+					</Flex>
 				</Flex>
 			</CardBody>
 		</Card>
