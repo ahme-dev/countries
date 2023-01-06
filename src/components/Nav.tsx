@@ -48,8 +48,8 @@ function DesktopNav() {
 		<>
 			{/* Nav (Desktop) */}
 			<Flex gap={4} display={{ base: "none", sm: "flex" }}>
-				{["Capitals", "Flags"].map((el) => (
-					<Link to={"/" + el.toLowerCase()}>
+				{["Capitals", "Flags"].map((el, i) => (
+					<Link key={i} to={"/" + el.toLowerCase()}>
 						<Button fontWeight={"bold"}>{el}</Button>
 					</Link>
 				))}

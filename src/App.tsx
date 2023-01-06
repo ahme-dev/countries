@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
 import { Capitals } from "./pages/Capitals";
+import { Flags } from "./pages/Flags";
 
 function App() {
 	return (
@@ -21,7 +22,7 @@ function App() {
 				<Center>
 					<Routes>
 						<Route path={"/capitals"} element={<Capitals></Capitals>} />
-						<Route path={"/flags"} />
+						<Route path={"/flags"} element={<Flags></Flags>} />
 					</Routes>
 				</Center>
 				{/* Footer */}
