@@ -22,7 +22,7 @@ export function Capitals() {
 		fetch();
 	}, []);
 
-	if (!data.answer) return <Spinner></Spinner>;
+	if (!data.answer) return <Spinner size={"xl"} m={4}></Spinner>;
 
 	return (
 		<Card
@@ -39,6 +39,7 @@ export function Capitals() {
 				<Image
 					m={4}
 					maxW={"xs"}
+					fallback={<Spinner size={"xl"} m={4}></Spinner>}
 					objectFit="cover"
 					src={data.flag}
 					alt={`Flag of ${data.country}`}
@@ -48,7 +49,7 @@ export function Capitals() {
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>{data.country}</Heading>
 					<Text>What is the Capital of this Country?</Text>
-					<SimpleGrid columns={2} spacing={2}>
+					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}

@@ -21,7 +21,7 @@ export function Flags() {
 		fetch();
 	}, []);
 
-	if (!data.answer) return <Spinner></Spinner>;
+	if (!data.answer) return <Spinner size={"xl"} m={4}></Spinner>;
 
 	return (
 		<Card
@@ -38,6 +38,7 @@ export function Flags() {
 				<Image
 					m={4}
 					maxW={"xs"}
+					fallback={<Spinner size={"xl"} m={4}></Spinner>}
 					objectFit="cover"
 					src={data.flag}
 					alt={`Unknown Flag`}
@@ -46,7 +47,7 @@ export function Flags() {
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
-					<SimpleGrid columns={2} spacing={2}>
+					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}
