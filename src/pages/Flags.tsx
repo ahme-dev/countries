@@ -7,6 +7,7 @@ import {
 	Flex,
 	Heading,
 	Image,
+	SimpleGrid,
 	Spinner,
 	useColorModeValue,
 } from "@chakra-ui/react";
@@ -46,11 +47,11 @@ export function Flags() {
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
-					<ButtonGroup flexWrap={"wrap"} gap={2}>
+					<SimpleGrid columns={2} spacing={2}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}
-					</ButtonGroup>
+					</SimpleGrid>
 				</Flex>
 			</CardBody>
 		</Card>

@@ -7,6 +7,7 @@ import {
 	Flex,
 	Heading,
 	Image,
+	SimpleGrid,
 	Spinner,
 	Text,
 	useColorModeValue,
@@ -48,11 +49,11 @@ export function Capitals() {
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>{data.country}</Heading>
 					<Text>What is the Capital of this Country?</Text>
-					<ButtonGroup flexWrap={"wrap"} gap={2}>
+					<SimpleGrid columns={2} spacing={2}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}
-					</ButtonGroup>
+					</SimpleGrid>
 				</Flex>
 			</CardBody>
 		</Card>
