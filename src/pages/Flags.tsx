@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	ButtonGroup,
 	Card,
@@ -33,17 +34,19 @@ export function Flags() {
 			alignItems="center"
 			overflow="hidden"
 		>
-			<Image
-				m={4}
-				maxW={"xs"}
-				objectFit="cover"
-				src={data.flag}
-				alt={`Unknown Flag`}
-			/>
+			<Box bg={useColorModeValue("gray.400", "gray.800")} m={4} rounded={"xl"}>
+				<Image
+					m={4}
+					maxW={"xs"}
+					objectFit="cover"
+					src={data.flag}
+					alt={`Unknown Flag`}
+				/>
+			</Box>
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
-					<ButtonGroup flexWrap={"wrap"} gap={4}>
+					<ButtonGroup flexWrap={"wrap"} gap={2}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}

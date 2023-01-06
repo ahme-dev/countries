@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	ButtonGroup,
 	Card,
@@ -34,18 +35,20 @@ export function Capitals() {
 			alignItems="center"
 			overflow="hidden"
 		>
-			<Image
-				m={4}
-				maxW={"xs"}
-				objectFit="cover"
-				src={data.flag}
-				alt={`Flag of ${data.country}`}
-			/>
+			<Box bg={useColorModeValue("gray.400", "gray.800")} m={4} rounded={"xl"}>
+				<Image
+					m={4}
+					maxW={"xs"}
+					objectFit="cover"
+					src={data.flag}
+					alt={`Flag of ${data.country}`}
+				/>
+			</Box>
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>{data.country}</Heading>
-					<Text>What is the Capital?</Text>
-					<ButtonGroup flexWrap={"wrap"} gap={4}>
+					<Text>What is the Capital of this Country?</Text>
+					<ButtonGroup flexWrap={"wrap"} gap={2}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}
