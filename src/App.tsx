@@ -1,7 +1,7 @@
-import { Container, Flex, Grid } from "@chakra-ui/react";
+import { Center, Container, Flex } from "@chakra-ui/react";
 import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
-import { Some } from "./components/Some";
+import { Capitals } from "./components/Capitals";
 
 function App() {
 	return (
@@ -17,9 +17,9 @@ function App() {
 				{/* Header */}
 				<Nav />
 				{/* Main */}
-				<Grid alignItems={"center"} justifyContent={"center"}>
-					<Some />
-				</Grid>
+				<Center>
+					<Capitals />
+				</Center>
 				{/* Footer */}
 				<Info />
 			</Flex>
