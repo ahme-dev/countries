@@ -30,8 +30,8 @@ export function Capitals() {
 		<Card
 			rounded={"xl"}
 			bgGradient={useColorModeValue(
-				"linear(to-r, gray.100, purple.200)",
-				"linear(to-r, gray.700, purple.800)",
+				"linear(to-r, blue.100, purple.200)",
+				"linear(to-r, blue.700, purple.800)",
 			)}
 			direction={{ base: "column", sm: "row" }}
 			alignItems="center"
