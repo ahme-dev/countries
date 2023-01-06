@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Text, useColorMode } from "@chakra-ui/react";
+import { Button, ButtonGroup, Text } from "@chakra-ui/react";
 import { useBearStore } from "../data/bears";
 
 export function Some() {
