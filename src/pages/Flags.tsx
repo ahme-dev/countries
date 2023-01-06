@@ -1,6 +1,6 @@
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
-	Box,
+	Center,
 	Button,
 	Card,
 	CardBody,
@@ -48,7 +48,11 @@ export function Flags() {
 			alignItems="center"
 			overflow="hidden"
 		>
-			<Box bg={useColorModeValue("gray.100", "gray.800")} m={4} rounded={"xl"}>
+			<Center
+				bg={useColorModeValue("gray.100", "gray.800")}
+				m={4}
+				rounded={"xl"}
+			>
 				<Image
 					m={4}
 					maxW={"xs"}
@@ -57,7 +61,7 @@ export function Flags() {
 					src={data[dataIndex].flag}
 					alt={`Unknown Flag`}
 				/>
-			</Box>
+			</Center>
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>

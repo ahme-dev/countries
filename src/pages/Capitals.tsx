@@ -3,6 +3,7 @@ import {
 	Button,
 	Card,
 	CardBody,
+	Center,
 	Flex,
 	Heading,
 	Image,
@@ -35,7 +36,11 @@ export function Capitals() {
 			alignItems="center"
 			overflow="hidden"
 		>
-			<Box bg={useColorModeValue("gray.400", "gray.800")} m={4} rounded={"xl"}>
+			<Center
+				bg={useColorModeValue("gray.400", "gray.800")}
+				m={4}
+				rounded={"xl"}
+			>
 				<Image
 					m={4}
 					maxW={"xs"}
@@ -44,7 +49,7 @@ export function Capitals() {
 					src={data.flag}
 					alt={`Flag of ${data.country}`}
 				/>
-			</Box>
+			</Center>
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>{data.country}</Heading>
