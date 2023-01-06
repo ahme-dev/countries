@@ -48,12 +48,7 @@ export function Flags() {
 			alignItems="center"
 			overflow="hidden"
 		>
-			<Box
-				onClick={next}
-				bg={useColorModeValue("gray.100", "gray.800")}
-				m={4}
-				rounded={"xl"}
-			>
+			<Box bg={useColorModeValue("gray.100", "gray.800")} m={4} rounded={"xl"}>
 				<Image
 					m={4}
 					maxW={"xs"}
