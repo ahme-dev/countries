@@ -1,4 +1,5 @@
 import {
+	useDisclosure,
 	Center,
 	Flex,
 	IconButton,
@@ -9,26 +10,126 @@ import {
 	MenuList,
 	useColorMode,
 	Button,
+	Drawer,
+	DrawerBody,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerOverlay,
+	DrawerContent,
+	ButtonGroup,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon, ChatIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import {
+	MoonIcon,
+	SunIcon,
+	ChatIcon,
+	SmallCloseIcon,
+	SettingsIcon,
+} from "@chakra-ui/icons";
 
 export function Nav() {
 	const { colorMode, toggleColorMode } = useColorMode();
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
 		<Flex direction={"row"} justifyContent={"space-between"}>
-			{/* Left */}
-			<Center gap={4}>
-				<Text fontWeight={"bold"} fontSize={"2xl"}>
-					Countries
-				</Text>
+			{/* Logo */}
+			<Text fontWeight={"bold"} fontSize={"2xl"}>
+				Countries
+			</Text>
 
+			{/* Drawer (Mobile) */}
+			<Flex display={{ base: "flex", sm: "none" }}>
+				{/* Drawer Button */}
+				<IconButton
+					variant={"outline"}
+					aria-label="Open settings menu"
+					onClick={onOpen}
+				>
+					<SettingsIcon />
+				</IconButton>
+
+				{/* Drawer Menu */}
+				<Drawer isOpen={isOpen} placement="right" closeOnEsc onClose={onClose}>
+					<DrawerOverlay />
+					<DrawerContent>
+						<DrawerHeader>Menu</DrawerHeader>
+
+						<DrawerBody>
+							<Flex h={"full"} direction={"column"} gap={4}>
+								<Button variant={"outline"}>Capitals</Button>
+								<Button variant={"outline"} fontWeight={"bold"}>
+									Flags
+								</Button>
+							</Flex>
+						</DrawerBody>
+
+						<DrawerFooter>
+							<Flex direction={"column"} w={"full"} gap={4}>
+								{/* Language */}
+								<Flex
+									alignItems={"center"}
+									justifyContent={"space-between"}
+									gap={2}
+								>
+									<Text fontWeight={"bold"}>Language:</Text>
+									<ButtonGroup isAttached variant={"outline"}>
+										<Button
+											aria-label="Switch to english"
+											onClick={toggleColorMode}
+										>
+											Eng
+										</Button>
+										<Button
+											aria-label="Switch to kurdish"
+											onClick={toggleColorMode}
+										>
+											Kur
+										</Button>
+									</ButtonGroup>
+								</Flex>
+								{/* Language end */}
+								{/* Theme */}
+								<Flex
+									alignItems={"center"}
+									justifyContent={"space-between"}
+									gap={2}
+								>
+									<Text fontWeight={"bold"}>Theme:</Text>
+									<ButtonGroup isAttached variant={"outline"}>
+										<IconButton
+											aria-label="Switch to dark theme"
+											onClick={toggleColorMode}
+											icon={<MoonIcon />}
+										></IconButton>
+										<IconButton
+											aria-label="Switch to light theme"
+											onClick={toggleColorMode}
+											icon={<SunIcon />}
+										></IconButton>
+									</ButtonGroup>
+								</Flex>
+								{/* Theme end */}
+								<Button
+									variant={"outline"}
+									onClick={onClose}
+									leftIcon={<SmallCloseIcon />}
+								>
+									Close
+								</Button>
+							</Flex>
+						</DrawerFooter>
+					</DrawerContent>
+				</Drawer>
+			</Flex>
+
+			{/* Nav (Desktop) */}
+			<Flex gap={4} display={{ base: "none", sm: "flex" }}>
 				<Button>Capitals</Button>
 				<Button fontWeight={"bold"}>Flags</Button>
-			</Center>
+			</Flex>
 
-			{/* Right */}
-			<Center gap={2}>
+			{/* Options (Desktop) */}
+			<Center gap={2} display={{ base: "none", sm: "flex" }}>
 				<Menu>
 					<MenuButton as={IconButton} icon={<ChatIcon />} />
 					<MenuList>
