@@ -16,6 +16,7 @@ interface FlagsStore {
 	checkResult: boolean;
 	next: () => void;
 	fetch: () => void;
+	fetchDone: boolean;
 }
 
 export const useFlagsStore = create<FlagsStore>()(
@@ -54,6 +55,7 @@ export const useFlagsStore = create<FlagsStore>()(
 				});
 			},
 
+			fetchDone: false,
 			fetch: async () => {
 				const res = await fetch(
 					"https://shadify.dev/api/countries/country-quiz?amount=20",
@@ -65,8 +67,9 @@ export const useFlagsStore = create<FlagsStore>()(
 					...el,
 					flag: el.flag.replace("w320", "256x192"),
 				}));
-				// set new data in zustand
+				// set fetchDone and new data in zustand
 				set({
+					fetchDone: true,
 					data: [...resDataFixed],
 				});
 			},

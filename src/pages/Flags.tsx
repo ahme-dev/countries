@@ -27,12 +27,12 @@ export function Flags() {
 		check,
 		checkResult,
 		fetch,
+		fetchDone,
 		next,
 	} = useFlagsStore();
 
 	useEffect(() => {
-		console.log(dataIndex);
-		if (dataIndex === 0) fetch();
+		if (!fetchDone) fetch();
 	}, []);
 
 	if (!data[dataIndex]) return <Spinner size={"xl"} m={4}></Spinner>;
