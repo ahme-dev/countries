@@ -11,14 +11,16 @@ import {
 	Spinner,
 	Text,
 	useColorModeValue,
+	useToast,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useFlagsStore } from "../data/flags";
 
 export function Flags() {
+	const toast = useToast();
+
 	// local
 	const [selected, setSelected] = useState<number>(-1);
-
 	// zustand
 	const { data, dataIndex, check, checkResult, fetch, next } = useFlagsStore();
 
@@ -80,9 +82,18 @@ export function Flags() {
 							),
 						)}
 					</SimpleGrid>
-					<Text>{JSON.stringify(checkResult)}</Text>
 					<Button
-						onClick={() => check(selected)}
+						onClick={() => {
+							if (selected === -1) return;
+							check(selected);
+							toast({
+								title: `Answer was ${checkResult ? "correct" : "incorrect"}`,
+								status: checkResult ? "success" : "error",
+								duration: 3000,
+								variant: "solid",
+							});
+							next();
+						}}
 						leftIcon={<CheckCircleIcon />}
 					>
 						Answer
