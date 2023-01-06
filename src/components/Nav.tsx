@@ -24,10 +24,11 @@ import {
 	ChatIcon,
 	SmallCloseIcon,
 	SettingsIcon,
+	HamburgerIcon,
 } from "@chakra-ui/icons";
 
 export function Nav() {
-	const { colorMode, toggleColorMode } = useColorMode();
+	const { colorMode, setColorMode, toggleColorMode } = useColorMode();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
@@ -45,7 +46,7 @@ export function Nav() {
 					aria-label="Open settings menu"
 					onClick={onOpen}
 				>
-					<SettingsIcon />
+					<HamburgerIcon />
 				</IconButton>
 
 				{/* Drawer Menu */}
@@ -98,12 +99,12 @@ export function Nav() {
 									<ButtonGroup isAttached variant={"outline"}>
 										<IconButton
 											aria-label="Switch to dark theme"
-											onClick={toggleColorMode}
+											onClick={() => setColorMode("dark")}
 											icon={<MoonIcon />}
 										></IconButton>
 										<IconButton
 											aria-label="Switch to light theme"
-											onClick={toggleColorMode}
+											onClick={() => setColorMode("light")}
 											icon={<SunIcon />}
 										></IconButton>
 									</ButtonGroup>
