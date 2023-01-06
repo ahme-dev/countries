@@ -12,7 +12,7 @@ interface CapitalsStore {
 	fetch: () => void;
 }
 
-export const useBearStore = create<CapitalsStore>((set) => ({
+export const useCapitalsStore = create<CapitalsStore>((set) => ({
 	data: { country: "", flag: "", variants: [""], answer: "" },
 	fetch: async () => {
 		const res = await fetch("https://shadify.dev/api/countries/capital-quiz");
