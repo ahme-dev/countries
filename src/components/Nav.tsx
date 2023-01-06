@@ -25,6 +25,7 @@ import {
 	SmallCloseIcon,
 	HamburgerIcon,
 } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 export function Nav() {
 	return (
@@ -47,8 +48,11 @@ function DesktopNav() {
 		<>
 			{/* Nav (Desktop) */}
 			<Flex gap={4} display={{ base: "none", sm: "flex" }}>
-				<Button>Capitals</Button>
-				<Button fontWeight={"bold"}>Flags</Button>
+				{["Capitals", "Flags"].map((el) => (
+					<Link to={"/" + el.toLowerCase()}>
+						<Button fontWeight={"bold"}>{el}</Button>
+					</Link>
+				))}
 			</Flex>
 
 			{/* Options (Desktop) */}

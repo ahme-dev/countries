@@ -11,11 +11,11 @@ import {
 	useColorModeValue,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useBearStore } from "../data/capitals";
+import { useCapitalsStore } from "../data/capitals";
 
 export function Capitals() {
 	// state
-	const { data, fetch } = useBearStore();
+	const { data, fetch } = useCapitalsStore();
 
 	useEffect(() => {
 		fetch();

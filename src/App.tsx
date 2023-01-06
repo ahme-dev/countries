@@ -1,7 +1,8 @@
 import { Center, Container, Flex } from "@chakra-ui/react";
+import { Route, Routes } from "react-router-dom";
 import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
-import { Capitals } from "./components/Capitals";
+import { Capitals } from "./pages/Capitals";
 
 function App() {
 	return (
@@ -18,7 +19,10 @@ function App() {
 				<Nav />
 				{/* Main */}
 				<Center>
-					<Capitals />
+					<Routes>
+						<Route path={"/capitals"} element={<Capitals></Capitals>} />
+						<Route path={"/flags"} />
+					</Routes>
 				</Center>
 				{/* Footer */}
 				<Info />
