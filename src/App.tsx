@@ -1,10 +1,19 @@
+import { Container, Flex } from "@chakra-ui/react";
+import { Nav } from "./components/Nav";
 import { Some } from "./components/Some";
 
 function App() {
 	return (
-		<div className="App">
-			<Some></Some>
-		</div>
+		<Container
+			maxW="container.lg"
+			minH={"96"}
+			// bg={"tomato"}
+		>
+			<Flex direction={"column"} gap={4} py={2}>
+				<Nav></Nav>
+				<Some></Some>
+			</Flex>
+		</Container>
 	);
 }
 
