@@ -1,28 +1,38 @@
 import {
+	Box,
 	Button,
+	ButtonGroup,
 	Card,
 	CardBody,
 	Flex,
 	Heading,
 	Image,
+	Skeleton,
+	SkeletonText,
+	Spinner,
 	Text,
+	useColorModeValue,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useBearStore } from "../data/capitals";
 
 export function Capitals() {
 	// state
 	const { data, fetch } = useBearStore();
 
-	if (!data.answer)
-		return (
-			<Card>
-				<Button onClick={fetch}>Fetch</Button>
-			</Card>
-		);
+	useEffect(() => {
+		fetch();
+	}, []);
+
+	if (!data.answer) return <Spinner></Spinner>;
 
 	return (
 		<Card
 			rounded={"xl"}
+			bgGradient={useColorModeValue(
+				"linear(to-r, gray.100, purple.200)",
+				"linear(to-r, gray.700, purple.800)",
+			)}
 			direction={{ base: "column", sm: "row" }}
 			alignItems="center"
 			overflow="hidden"
@@ -38,11 +48,11 @@ export function Capitals() {
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>{data.country}</Heading>
 					<Text>What is the Capital?</Text>
-					<Flex wrap={"wrap"} gap={2}>
+					<ButtonGroup flexWrap={"wrap"} gap={4}>
 						{data.variants.map((el, i) => (
 							<Button key={i}>{el}</Button>
 						))}
-					</Flex>
+					</ButtonGroup>
 				</Flex>
 			</CardBody>
 		</Card>
