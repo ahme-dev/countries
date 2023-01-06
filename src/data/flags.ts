@@ -12,7 +12,7 @@ interface FlagsStore {
 	data: FlagsData[];
 	selected: number;
 	changeSelected: (num: number) => void;
-	check: () => void;
+	check: () => boolean;
 	checkResult: boolean;
 	next: () => void;
 	fetch: () => void;
@@ -39,6 +39,8 @@ export const useFlagsStore = create<FlagsStore>()(
 					get().data[get().dataIndex].variants[get().selected];
 
 				set({ checkResult: wasCorrect });
+
+				return wasCorrect;
 			},
 			checkResult: false,
 

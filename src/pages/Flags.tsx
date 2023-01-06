@@ -54,6 +54,7 @@ export function Flags() {
 			direction={{ base: "column", sm: "row" }}
 			alignItems="center"
 			overflow="hidden"
+			p={2}
 		>
 			<Center
 				bg={useColorModeValue("gray.100", "gray.800")}
@@ -106,10 +107,10 @@ export function Flags() {
 							w={"full"}
 							onClick={() => {
 								if (selected === -1) return;
-								check();
+								let result = check();
 								toast({
-									title: `Answer was ${checkResult ? "correct" : "incorrect"}`,
-									status: checkResult ? "success" : "error",
+									title: `Answer was ${result ? "correct" : "incorrect"}`,
+									status: result ? "success" : "error",
 									duration: 3000,
 									variant: "solid",
 								});
