@@ -68,8 +68,6 @@ export const useFlagsStore = create<FlagsStore>()(
 					wasCorrect: get().checkResult,
 				};
 
-				// console.log("adding", newItem);
-
 				set({ history: [...get().history, newItem] });
 			},
 

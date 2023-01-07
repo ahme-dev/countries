@@ -1,9 +1,4 @@
-import {
-	CheckCircleIcon,
-	CheckIcon,
-	ChevronDownIcon,
-	CloseIcon,
-} from "@chakra-ui/icons";
+import { CheckCircleIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
@@ -16,12 +11,15 @@ import {
 	Spinner,
 	useColorModeValue,
 	useToast,
-	Menu,
-	MenuButton,
-	MenuList,
-	MenuItem,
 	IconButton,
 	Text,
+	Badge,
+	PopoverBody,
+	PopoverArrow,
+	PopoverContent,
+	Popover,
+	PopoverTrigger,
+	PopoverHeader,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useFlagsStore } from "../data/flags";
@@ -106,33 +104,43 @@ export function Flags() {
 					</SimpleGrid>
 					{/* Choices end */}
 					<Flex justifyContent={"center"} gap={2}>
-						{/* Previous */}
-						<Menu>
-							<MenuButton as={IconButton}>
-								<ChevronDownIcon />
-							</MenuButton>
-							<MenuList maxH={40} overflow={"scroll"}>
-								{[...history].reverse().map((el) => (
-									<MenuItem>
-										<Flex
-											w={"full"}
-											gap={2}
-											justifyContent="space-between"
-											alignItems={"center"}
-										>
-											<Center>
-												<Image boxSize="2rem" src={el.flag} mr="12px" />
-												<Text overflowWrap={"break-word"} textAlign={"start"}>
-													is {el.answer}
-												</Text>
-											</Center>
-											{el.wasCorrect ? <CheckIcon /> : <CloseIcon />}
-										</Flex>
-									</MenuItem>
-								))}
-							</MenuList>
-						</Menu>
-						{/* Previous end */}
+						{/* History */}
+						<Popover>
+							<PopoverTrigger>
+								<IconButton aria-label="History button">
+									<ChevronDownIcon />
+								</IconButton>
+							</PopoverTrigger>
+							<PopoverContent>
+								<PopoverArrow />
+								<PopoverHeader>Previous Questions:</PopoverHeader>
+								<PopoverBody>
+									<Flex
+										direction={"column"}
+										maxH={40}
+										overflow={"scroll"}
+										gap={2}
+									>
+										{[...history].reverse().map((el) => (
+											<Badge
+												w={"full"}
+												p={2}
+												borderRadius={"lg"}
+												colorScheme={el.wasCorrect ? "green" : "red"}
+											>
+												<Flex w={"full"} gap={2} alignItems={"center"}>
+													<Image boxSize="2rem" src={el.flag} mr="12px" />
+													<Text overflowWrap={"break-word"} textAlign={"start"}>
+														is {el.answer}
+													</Text>
+												</Flex>
+											</Badge>
+										))}
+									</Flex>
+								</PopoverBody>
+							</PopoverContent>
+						</Popover>
+						{/* History end */}
 
 						{/* Answer button */}
 						<Button
