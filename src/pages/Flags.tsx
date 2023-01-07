@@ -1,5 +1,4 @@
 import {
-	ArrowBackIcon,
 	CheckCircleIcon,
 	CheckIcon,
 	ChevronDownIcon,
@@ -50,7 +49,6 @@ export function Flags() {
 		changeSelected,
 		check,
 		history,
-		checkResult,
 		fetch,
 		fetchDone,
 		next,
