@@ -1,4 +1,4 @@
-import { CheckCircleIcon, TimeIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, TimeIcon, DeleteIcon } from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
@@ -47,6 +47,7 @@ export function Flags() {
 		changeSelected,
 		check,
 		history,
+		clearHistory,
 		fetch,
 		fetchDone,
 		next,
@@ -116,7 +117,18 @@ export function Flags() {
 							</PopoverTrigger>
 							<PopoverContent>
 								<PopoverArrow />
-								<PopoverHeader>Previous Answers:</PopoverHeader>
+								<PopoverHeader>
+									<Flex justifyContent={"space-between"} alignItems={"center"}>
+										<Text>Answer history:</Text>
+										<IconButton
+											onClick={() => clearHistory()}
+											size={"xs"}
+											aria-label="clear out answers history button"
+										>
+											<DeleteIcon></DeleteIcon>
+										</IconButton>
+									</Flex>
+								</PopoverHeader>
 								<PopoverBody>
 									<Flex
 										direction={"column"}
@@ -124,28 +136,36 @@ export function Flags() {
 										overflow={"scroll"}
 										gap={2}
 									>
-										{[...history].reverse().map((el, i) => (
-											<Badge
-												w={"full"}
-												key={i}
-												py={1}
-												px={2}
-												borderRadius={"lg"}
-												colorScheme={el.wasCorrect ? "green" : "red"}
-											>
-												<Flex w={"full"} gap={2} alignItems={"center"}>
-													<Image
-														rounded={"full"}
-														boxSize="2rem"
-														src={el.flag}
-													/>
-													<Text>=</Text>
-													<Text overflowWrap={"break-word"} textAlign={"start"}>
-														{el.answer}
-													</Text>
-												</Flex>
-											</Badge>
-										))}
+										{history.length === 0
+											? "Empty"
+											: [...history].reverse().map((el, i) => (
+													<Badge
+														w={"full"}
+														key={i}
+														py={1}
+														px={2}
+														borderRadius={"lg"}
+														colorScheme={el.wasCorrect ? "green" : "red"}
+													>
+														<Flex w={"full"} gap={2} alignItems={"center"}>
+															<Image
+																rounded={"full"}
+																boxSize="2rem"
+																src={el.flag}
+															/>
+															<Flex direction={"column"}>
+																{el.wasCorrect ? (
+																	<Text as="b">{el.userAnswer}</Text>
+																) : (
+																	<>
+																		<Text as="del">{el.userAnswer}</Text>
+																		<Text as="b">{el.answer}</Text>
+																	</>
+																)}
+															</Flex>
+														</Flex>
+													</Badge>
+											  ))}
 									</Flex>
 								</PopoverBody>
 							</PopoverContent>

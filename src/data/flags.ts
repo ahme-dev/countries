@@ -27,6 +27,7 @@ interface FlagsStore {
 
 	history: FlagsHistoryData[];
 	addToHistory: () => void;
+	clearHistory: () => void;
 
 	next: () => void;
 	fetch: () => void;
@@ -69,6 +70,9 @@ export const useFlagsStore = create<FlagsStore>()(
 				};
 
 				set({ history: [...get().history, newItem] });
+			},
+			clearHistory: () => {
+				set({ history: [] });
 			},
 
 			next: async () => {
