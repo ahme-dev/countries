@@ -86,6 +86,8 @@ export function Flags() {
 				/>
 			</Center>
 			{/* Flag end */}
+
+			{/* Body */}
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
@@ -103,6 +105,7 @@ export function Flags() {
 						))}
 					</SimpleGrid>
 					{/* Choices end */}
+
 					<Flex justifyContent={"center"} gap={2}>
 						{/* History */}
 						<Popover>
@@ -135,8 +138,9 @@ export function Flags() {
 														boxSize="2rem"
 														src={el.flag}
 													/>
+													<Text>=</Text>
 													<Text overflowWrap={"break-word"} textAlign={"start"}>
-														is {el.answer}
+														{el.answer}
 													</Text>
 												</Flex>
 											</Badge>
@@ -159,6 +163,7 @@ export function Flags() {
 					</Flex>
 				</Flex>
 			</CardBody>
+			{/* Body end */}
 		</Card>
 	);
 }
