@@ -113,7 +113,7 @@ export function Flags() {
 							</PopoverTrigger>
 							<PopoverContent>
 								<PopoverArrow />
-								<PopoverHeader>Previous Questions:</PopoverHeader>
+								<PopoverHeader>Previous Answers:</PopoverHeader>
 								<PopoverBody>
 									<Flex
 										direction={"column"}
@@ -124,12 +124,17 @@ export function Flags() {
 										{[...history].reverse().map((el) => (
 											<Badge
 												w={"full"}
-												p={2}
+												py={1}
+												px={2}
 												borderRadius={"lg"}
 												colorScheme={el.wasCorrect ? "green" : "red"}
 											>
 												<Flex w={"full"} gap={2} alignItems={"center"}>
-													<Image boxSize="2rem" src={el.flag} mr="12px" />
+													<Image
+														rounded={"full"}
+														boxSize="2rem"
+														src={el.flag}
+													/>
 													<Text overflowWrap={"break-word"} textAlign={"start"}>
 														is {el.answer}
 													</Text>
