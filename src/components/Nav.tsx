@@ -17,6 +17,7 @@ import {
 	DrawerOverlay,
 	DrawerContent,
 	ButtonGroup,
+	Image,
 } from "@chakra-ui/react";
 import {
 	MoonIcon,
@@ -26,14 +27,22 @@ import {
 	HamburgerIcon,
 } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import Logo from "../../logo.png";
 
 export function Nav() {
 	return (
-		<Flex direction={"row"} justifyContent={"space-between"}>
+		<Flex
+			direction={"row"}
+			justifyContent={"space-between"}
+			alignItems="center"
+		>
 			<Link to={"/"}>
-				<Text fontWeight={"bold"} fontSize={"2xl"}>
-					Countries
-				</Text>
+				<Center gap={2}>
+					<Image borderRadius={"md"} p={1} h={12} src={Logo} />
+					<Text fontSize={"xl"} fontWeight={"bold"}>
+						Countries
+					</Text>
+				</Center>
 			</Link>
 
 			<MobileMenu></MobileMenu>
