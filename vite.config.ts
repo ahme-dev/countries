@@ -11,10 +11,10 @@ export default defineConfig({
 			registerType: "autoUpdate",
 			includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
 			manifest: {
-				name: "My Awesome App",
-				short_name: "MyApp",
-				description: "My Awesome App description",
-				theme_color: "#d04040",
+				name: "Countries",
+				short_name: "Countries",
+				description: "Guess countries' capitals or by flag",
+				theme_color: "#4070d0",
 				icons: [
 					{
 						src: "pwa-192x192.png",
