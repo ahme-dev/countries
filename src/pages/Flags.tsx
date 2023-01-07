@@ -1,4 +1,10 @@
-import { ArrowBackIcon, CheckCircleIcon } from "@chakra-ui/icons";
+import {
+	ArrowBackIcon,
+	CheckCircleIcon,
+	CheckIcon,
+	ChevronDownIcon,
+	CloseIcon,
+} from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
@@ -11,13 +17,12 @@ import {
 	Spinner,
 	useColorModeValue,
 	useToast,
+	Menu,
+	MenuButton,
+	MenuList,
+	MenuItem,
 	IconButton,
-	Popover,
-	PopoverTrigger,
-	PopoverContent,
-	PopoverArrow,
-	PopoverHeader,
-	PopoverBody,
+	Text,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useFlagsStore } from "../data/flags";
@@ -44,6 +49,7 @@ export function Flags() {
 		selected,
 		changeSelected,
 		check,
+		history,
 		checkResult,
 		fetch,
 		fetchDone,
@@ -65,7 +71,7 @@ export function Flags() {
 			)}
 			direction={{ base: "column", sm: "row" }}
 			alignItems="center"
-			overflow="hidden"
+			// overflow="hidden"
 			p={2}
 		>
 			{/* Flag */}
@@ -103,22 +109,31 @@ export function Flags() {
 					{/* Choices end */}
 					<Flex justifyContent={"center"} gap={2}>
 						{/* Previous */}
-						<Popover isLazy>
-							<PopoverTrigger>
-								<IconButton aria-label="Previous Answer Button">
-									<ArrowBackIcon />
-								</IconButton>
-							</PopoverTrigger>
-							<PopoverContent>
-								<PopoverArrow />
-								<PopoverHeader>
-									Your answer was {checkResult ? "Correct" : "Incorrect"}
-								</PopoverHeader>
-								<PopoverBody>
-									Are you sure you want to have that milkshake?
-								</PopoverBody>
-							</PopoverContent>
-						</Popover>
+						<Menu>
+							<MenuButton as={IconButton}>
+								<ChevronDownIcon />
+							</MenuButton>
+							<MenuList maxH={40} overflow={"scroll"}>
+								{[...history].reverse().map((el) => (
+									<MenuItem>
+										<Flex
+											w={"full"}
+											gap={2}
+											justifyContent="space-between"
+											alignItems={"center"}
+										>
+											<Center>
+												<Image boxSize="2rem" src={el.flag} mr="12px" />
+												<Text overflowWrap={"break-word"} textAlign={"start"}>
+													is {el.answer}
+												</Text>
+											</Center>
+											{el.wasCorrect ? <CheckIcon /> : <CloseIcon />}
+										</Flex>
+									</MenuItem>
+								))}
+							</MenuList>
+						</Menu>
 						{/* Previous end */}
 
 						{/* Answer button */}

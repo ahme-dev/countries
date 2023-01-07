@@ -7,13 +7,27 @@ interface FlagsData {
 	answer: string;
 }
 
+interface FlagsHistoryData {
+	flag: string;
+	variants: string[];
+	answer: string;
+	userAnswer: string;
+	wasCorrect: boolean;
+}
+
 interface FlagsStore {
 	dataIndex: number;
 	data: FlagsData[];
+
 	selected: number;
 	changeSelected: (num: number) => void;
+
 	check: () => boolean;
 	checkResult: boolean;
+
+	history: FlagsHistoryData[];
+	addToHistory: () => void;
+
 	next: () => void;
 	fetch: () => void;
 	fetchDone: boolean;
@@ -44,7 +58,24 @@ export const useFlagsStore = create<FlagsStore>()(
 			},
 			checkResult: false,
 
+			history: [],
+			addToHistory: () => {
+				const newItem = {
+					flag: get().data[get().dataIndex].flag.replace("256x192", "80x60"),
+					variants: get().data[get().dataIndex].variants,
+					answer: get().data[get().dataIndex].answer,
+					userAnswer: get().data[get().dataIndex].variants[get().selected],
+					wasCorrect: get().checkResult,
+				};
+
+				// console.log("adding", newItem);
+
+				set({ history: [...get().history, newItem] });
+			},
+
 			next: async () => {
+				get().addToHistory();
+
 				// if reached the end refetch and set to zero
 				if (get().dataIndex == 19) {
 					get().fetch();
