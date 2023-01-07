@@ -124,9 +124,10 @@ export function Flags() {
 										overflow={"scroll"}
 										gap={2}
 									>
-										{[...history].reverse().map((el) => (
+										{[...history].reverse().map((el, i) => (
 											<Badge
 												w={"full"}
+												key={i}
 												py={1}
 												px={2}
 												borderRadius={"lg"}
