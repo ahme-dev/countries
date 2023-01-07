@@ -9,12 +9,12 @@ export default defineConfig({
 		react(),
 		VitePWA({
 			registerType: "autoUpdate",
-			includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+			includeAssets: ["favicon.ico", "apple-touch-icon.png"],
 			manifest: {
 				name: "Countries",
 				short_name: "Countries",
 				description: "Guess countries' capitals or by flag",
-				theme_color: "#4070d0",
+				theme_color: "#c0d0f0",
 				icons: [
 					{
 						src: "pwa-192x192.png",
@@ -25,12 +25,6 @@ export default defineConfig({
 						src: "pwa-512x512.png",
 						sizes: "512x512",
 						type: "image/png",
-					},
-					{
-						src: "pwa-512x512.png",
-						sizes: "512x512",
-						type: "image/png",
-						purpose: "any maskable",
 					},
 				],
 			},
