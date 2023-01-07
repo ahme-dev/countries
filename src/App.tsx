@@ -4,6 +4,7 @@ import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
 import { Capitals } from "./pages/Capitals";
 import { Flags } from "./pages/Flags";
+import { Main } from "./pages/Main";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				{/* Main */}
 				<Center>
 					<Routes>
+						<Route path={"/"} element={<Main></Main>} />
 						<Route path={"/capitals"} element={<Capitals></Capitals>} />
 						<Route path={"/flags"} element={<Flags></Flags>} />
 					</Routes>
