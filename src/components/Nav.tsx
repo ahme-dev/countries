@@ -64,7 +64,6 @@ function DesktopNav() {
 					<MenuButton as={IconButton} icon={<ChatIcon />} />
 					<MenuList>
 						<MenuItem>English</MenuItem>
-						<MenuItem>Kurdish</MenuItem>
 					</MenuList>
 				</Menu>
 				<IconButton
@@ -78,7 +77,7 @@ function DesktopNav() {
 }
 
 function MobileMenu() {
-	const { setColorMode, toggleColorMode } = useColorMode();
+	const { setColorMode } = useColorMode();
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	return (
@@ -102,7 +101,7 @@ function MobileMenu() {
 						<Flex h={"full"} direction={"column"} gap={4}>
 							{["Capitals", "Flags"].map((el, i) => (
 								<Link key={i} to={"/" + el.toLowerCase()}>
-									<Button variant={"outline"} fontWeight={"bold"}>
+									<Button w={"full"} variant={"outline"} fontWeight={"bold"}>
 										{el}
 									</Button>
 								</Link>
@@ -120,18 +119,7 @@ function MobileMenu() {
 							>
 								<Text fontWeight={"bold"}>Language:</Text>
 								<ButtonGroup isAttached variant={"outline"}>
-									<Button
-										aria-label="Switch to english"
-										onClick={toggleColorMode}
-									>
-										Eng
-									</Button>
-									<Button
-										aria-label="Switch to kurdish"
-										onClick={toggleColorMode}
-									>
-										Kur
-									</Button>
+									<Button aria-label="Switch to english">Eng</Button>
 								</ButtonGroup>
 							</Flex>
 							{/* Language end */}
