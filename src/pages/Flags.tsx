@@ -136,36 +136,48 @@ export function Flags() {
 										overflow={"scroll"}
 										gap={2}
 									>
-										{history.length === 0
-											? "Empty"
-											: [...history].reverse().map((el, i) => (
-													<Badge
-														w={"full"}
-														key={i}
-														py={1}
-														px={2}
-														borderRadius={"lg"}
-														colorScheme={el.wasCorrect ? "green" : "red"}
-													>
-														<Flex w={"full"} gap={2} alignItems={"center"}>
-															<Image
-																rounded={"full"}
-																boxSize="2rem"
-																src={el.flag}
-															/>
-															<Flex direction={"column"}>
-																{el.wasCorrect ? (
-																	<Text as="b">{el.userAnswer}</Text>
-																) : (
-																	<>
-																		<Text as="del">{el.userAnswer}</Text>
-																		<Text as="b">{el.answer}</Text>
-																	</>
-																)}
-															</Flex>
+										{/* When history is empty */}
+										{history.length === 0 ? (
+											<Badge
+												w={"full"}
+												py={1}
+												px={2}
+												borderRadius={"lg"}
+												colorScheme={"blue"}
+											>
+												Empty
+											</Badge>
+										) : (
+											// When There is history
+											[...history].reverse().map((el, i) => (
+												<Badge
+													w={"full"}
+													key={i}
+													py={1}
+													px={2}
+													borderRadius={"lg"}
+													colorScheme={el.wasCorrect ? "green" : "red"}
+												>
+													<Flex w={"full"} gap={2} alignItems={"center"}>
+														<Image
+															rounded={"full"}
+															boxSize="2rem"
+															src={el.flag}
+														/>
+														<Flex direction={"column"}>
+															{el.wasCorrect ? (
+																<Text as="b">{el.userAnswer}</Text>
+															) : (
+																<>
+																	<Text as="del">{el.userAnswer}</Text>
+																	<Text as="b">{el.answer}</Text>
+																</>
+															)}
 														</Flex>
-													</Badge>
-											  ))}
+													</Flex>
+												</Badge>
+											))
+										)}
 									</Flex>
 								</PopoverBody>
 							</PopoverContent>
