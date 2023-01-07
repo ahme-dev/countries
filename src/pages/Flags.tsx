@@ -25,6 +25,18 @@ import { useFlagsStore } from "../data/flags";
 export function Flags() {
 	const toast = useToast();
 
+	const handleAnswer = () => {
+		if (selected === -1) return;
+		let result = check();
+		toast({
+			title: `Answer was ${result ? "correct" : "incorrect"}`,
+			status: result ? "success" : "error",
+			duration: 3000,
+			variant: "solid",
+		});
+		next();
+	};
+
 	// zustand
 	const {
 		data,
@@ -56,6 +68,7 @@ export function Flags() {
 			overflow="hidden"
 			p={2}
 		>
+			{/* Flag */}
 			<Center
 				bg={useColorModeValue("gray.100", "gray.800")}
 				m={4}
@@ -70,9 +83,11 @@ export function Flags() {
 					alt={`Unknown Flag`}
 				/>
 			</Center>
+			{/* Flag end */}
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
+					{/* Choices */}
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
 						{data[dataIndex].variants.map((el, i) => (
 							<Button
@@ -85,7 +100,9 @@ export function Flags() {
 							</Button>
 						))}
 					</SimpleGrid>
+					{/* Choices end */}
 					<Flex justifyContent={"center"} gap={2}>
+						{/* Previous */}
 						<Popover isLazy>
 							<PopoverTrigger>
 								<IconButton aria-label="Previous Answer Button">
@@ -102,24 +119,17 @@ export function Flags() {
 								</PopoverBody>
 							</PopoverContent>
 						</Popover>
+						{/* Previous end */}
 
+						{/* Answer button */}
 						<Button
 							w={"full"}
-							onClick={() => {
-								if (selected === -1) return;
-								let result = check();
-								toast({
-									title: `Answer was ${result ? "correct" : "incorrect"}`,
-									status: result ? "success" : "error",
-									duration: 3000,
-									variant: "solid",
-								});
-								next();
-							}}
+							onClick={() => handleAnswer()}
 							leftIcon={<CheckCircleIcon />}
 						>
 							Answer
 						</Button>
+						{/* Answer button end */}
 					</Flex>
 				</Flex>
 			</CardBody>
