@@ -17,6 +17,7 @@ import {
 	DrawerOverlay,
 	DrawerContent,
 	ButtonGroup,
+	LinkBox,
 } from "@chakra-ui/react";
 import {
 	MoonIcon,
@@ -30,9 +31,11 @@ import { Link } from "react-router-dom";
 export function Nav() {
 	return (
 		<Flex direction={"row"} justifyContent={"space-between"}>
-			<Text fontWeight={"bold"} fontSize={"2xl"}>
-				Countries
-			</Text>
+			<Link to={"/"}>
+				<Text fontWeight={"bold"} fontSize={"2xl"}>
+					Countries
+				</Text>
+			</Link>
 
 			<MobileMenu></MobileMenu>
 
