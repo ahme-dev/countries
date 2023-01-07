@@ -1,4 +1,4 @@
-import { CheckCircleIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon, TimeIcon } from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
@@ -108,7 +108,7 @@ export function Flags() {
 						<Popover>
 							<PopoverTrigger>
 								<IconButton aria-label="History button">
-									<ChevronDownIcon />
+									<TimeIcon />
 								</IconButton>
 							</PopoverTrigger>
 							<PopoverContent>
