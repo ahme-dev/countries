@@ -109,6 +109,7 @@ export const useFlagsStore = create<FlagsStore>()(
 				});
 			},
 		}),
+
 		{
 			name: "flagsData",
 			storage: createJSONStorage(() => localStorage),
