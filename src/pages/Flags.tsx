@@ -1,4 +1,5 @@
-import { CheckCircleIcon, TimeIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useState } from "react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
@@ -10,54 +11,57 @@ import {
 	SimpleGrid,
 	Spinner,
 	useColorModeValue,
-	useToast,
-	IconButton,
 	Text,
-	Badge,
-	PopoverBody,
-	PopoverArrow,
-	PopoverContent,
-	Popover,
-	PopoverTrigger,
-	PopoverHeader,
+	useToast,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useFlagsStore } from "../data/flags";
+import { useQuery } from "@tanstack/react-query";
 
 export function Flags() {
 	const toast = useToast();
 
-	const handleAnswer = () => {
-		if (selected === -1) return;
-		let result = check();
-		toast({
-			title: `Answer was ${result ? "correct" : "incorrect"}`,
-			status: result ? "success" : "error",
-			duration: 3000,
-			variant: "solid",
-		});
-		next();
+	// const queryClient = useQueryClient();
+	const { isLoading, data, error } = useQuery({
+		queryKey: ["getFlag"],
+		queryFn: async () => {
+			const res = await fetch(
+				"https://countries-backend-production.up.railway.app/flags/2",
+			);
+			const resData = await res.json();
+			return resData;
+		},
+	});
+
+	const [selected, setSelected] = useState(-1);
+	const changeSelected = (num: number) => {
+		// if already selected unselect
+		if (selected === num) setSelected(selected);
+		setSelected(num);
 	};
 
-	// zustand
-	const {
-		data,
-		dataIndex,
-		selected,
-		changeSelected,
-		check,
-		history,
-		clearHistory,
-		fetch,
-		fetchDone,
-		next,
-	} = useFlagsStore();
+	const { refetch } = useQuery({
+		queryKey: ["getFlagAnswer"],
+		queryFn: async () => {
+			const res = await fetch(
+				`https://countries-backend-production.up.railway.app/flags/2?answer=${data.variants[selected]}`,
+			);
+			const resData = await res.json();
+			return resData;
+		},
+		onSuccess: (parData) => {
+			toast({
+				title: `Answer was ${parData.isCorrect ? "correct" : "incorrect"}`,
+				status: parData.isCorrect ? "success" : "error",
+				duration: 3000,
+				variant: "solid",
+			});
+		},
+		enabled: false,
+	});
 
-	useEffect(() => {
-		if (!fetchDone) fetch();
-	}, []);
+	const handleAnswer = () => refetch();
 
-	if (!data[dataIndex]) return <Spinner size={"xl"} m={4}></Spinner>;
+	if (isLoading) return <Spinner size={"xl"} m={4}></Spinner>;
+	if (error) return <Text>Couldn't load anything</Text>;
 
 	return (
 		<Card
@@ -82,7 +86,7 @@ export function Flags() {
 					maxW={"xs"}
 					fallback={<Spinner size={"xl"} m={4}></Spinner>}
 					objectFit="cover"
-					src={data[dataIndex].flag}
+					src={data.flag}
 					alt={`Unknown Flag`}
 				/>
 			</Center>
@@ -94,7 +98,7 @@ export function Flags() {
 					<Heading size={"md"}>What country does this flag belong to?</Heading>
 					{/* Choices */}
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
-						{data[dataIndex].variants.map((el, i) => (
+						{data.variants.map((el: any, i: number) => (
 							<Button
 								onClick={() => changeSelected(i)}
 								key={i}
@@ -108,82 +112,6 @@ export function Flags() {
 					{/* Choices end */}
 
 					<Flex justifyContent={"center"} gap={2}>
-						{/* History */}
-						<Popover>
-							<PopoverTrigger>
-								<IconButton aria-label="History button">
-									<TimeIcon />
-								</IconButton>
-							</PopoverTrigger>
-							<PopoverContent>
-								<PopoverArrow />
-								<PopoverHeader>
-									<Flex justifyContent={"space-between"} alignItems={"center"}>
-										<Text>Answer history:</Text>
-										<IconButton
-											onClick={() => clearHistory()}
-											size={"xs"}
-											aria-label="clear out answers history button"
-										>
-											<DeleteIcon></DeleteIcon>
-										</IconButton>
-									</Flex>
-								</PopoverHeader>
-								<PopoverBody>
-									<Flex
-										direction={"column"}
-										maxH={40}
-										overflow={"scroll"}
-										gap={2}
-									>
-										{/* When history is empty */}
-										{history.length === 0 ? (
-											<Badge
-												w={"full"}
-												py={1}
-												px={2}
-												borderRadius={"lg"}
-												colorScheme={"blue"}
-											>
-												Empty
-											</Badge>
-										) : (
-											// When There is history
-											[...history].reverse().map((el, i) => (
-												<Badge
-													w={"full"}
-													key={i}
-													py={1}
-													px={2}
-													borderRadius={"lg"}
-													colorScheme={el.wasCorrect ? "green" : "red"}
-												>
-													<Flex w={"full"} gap={2} alignItems={"center"}>
-														<Image
-															rounded={"full"}
-															boxSize="2rem"
-															src={el.flag}
-														/>
-														<Flex direction={"column"}>
-															{el.wasCorrect ? (
-																<Text as="b">{el.userAnswer}</Text>
-															) : (
-																<>
-																	<Text as="del">{el.userAnswer}</Text>
-																	<Text as="b">{el.answer}</Text>
-																</>
-															)}
-														</Flex>
-													</Flex>
-												</Badge>
-											))
-										)}
-									</Flex>
-								</PopoverBody>
-							</PopoverContent>
-						</Popover>
-						{/* History end */}
-
 						{/* Answer button */}
 						<Button
 							w={"full"}
