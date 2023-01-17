@@ -24,7 +24,7 @@ export function Flags() {
 		queryKey: ["getFlag"],
 		queryFn: async () => {
 			const res = await fetch(
-				"https://countries-backend-production.up.railway.app/flags/2",
+				"https://countries-backend.ahmed.systems/flags/2",
 			);
 			const resData = await res.json();
 			return resData;
@@ -42,7 +42,7 @@ export function Flags() {
 		queryKey: ["getFlagAnswer"],
 		queryFn: async () => {
 			const res = await fetch(
-				`https://countries-backend-production.up.railway.app/flags/2?answer=${data.variants[selected]}`,
+				`https://countries-backend.ahmed.systems/flags/2?answer=${data.variants[selected]}`,
 			);
 			const resData = await res.json();
 			return resData;
