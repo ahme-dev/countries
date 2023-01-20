@@ -9,7 +9,7 @@ import { Answer, Flag, UserResponse } from "../types";
 
 export function Flags() {
 	const toast = useToast();
-	const { i18n } = useTranslation();
+	const { i18n, t } = useTranslation();
 
 	// fetch
 
@@ -68,10 +68,13 @@ export function Flags() {
 		let isCorrect = selectedVariant === flagsData[userData.flags.index].answer;
 
 		toast({
-			title: `Answer was ${isCorrect ? "correct" : "incorrect"}`,
+			title: t(`Answer was ${isCorrect ? "correct" : "incorrect"}`),
 			status: isCorrect ? "success" : "error",
 			duration: 3000,
 			variant: "solid",
+			containerStyle: {
+				fontFamily: "NizarART"
+			}
 		});
 
 		mutation.mutate({

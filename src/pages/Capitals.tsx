@@ -1,6 +1,7 @@
 import { Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import { Play } from "../components/Play";
 import { Answer, Capital, UserResponse } from "../types";
 
@@ -8,6 +9,7 @@ import { Answer, Capital, UserResponse } from "../types";
 
 export function Capitals() {
 	const toast = useToast();
+	const { t } = useTranslation();
 
 	// fetch
 
@@ -67,7 +69,7 @@ export function Capitals() {
 			selectedVariant === capitalsData[userData.capitals.index].answer;
 
 		toast({
-			title: `Answer was ${isCorrect ? "correct" : "incorrect"}`,
+			title: t(`Answer was ${isCorrect ? "correct" : "incorrect"}`),
 			status: isCorrect ? "success" : "error",
 			duration: 3000,
 			variant: "solid",

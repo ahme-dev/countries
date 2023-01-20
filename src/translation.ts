@@ -7,15 +7,22 @@ const resources = {
 			Countries: "وڵاتان",
 			Capitals: "پایتەختەکان",
 			Flags: "ئاڵاکان",
+
 			"What country does this flag belong to?": "ئەم ئاڵایە ئی چی وڵاتێکە؟",
 			"What is the capital of": "پەیتەختی ئەم وڵاتە کوێیە",
+
+			"Answer was correct": "وەڵامەکە ڕاستبوو",
+			"Answer was incorrect": "وەڵامەکە هەڵەبوو",
+
 			Answer: "وەڵامبدەوە",
 			"Answer history": "مێژووی وەڵامەکان",
+
 			Menu: "هەڵبژاردەکان",
 			Language: "زمان",
 			Theme: "ڕەنگ",
 			Close: "دابخە",
 			Empty: "بەتاڵ",
+
 			English: "ئینگلیزی",
 			Kurdish: "کوردی",
 			Eng: "ئنگ",
