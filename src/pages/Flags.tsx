@@ -19,6 +19,8 @@ import { useQuery } from "@tanstack/react-query";
 export function Flags() {
 	const toast = useToast();
 
+	// server data
+
 	// const queryClient = useQueryClient();
 	const { isLoading, data, error } = useQuery({
 		queryKey: ["getFlag"],
@@ -30,13 +32,6 @@ export function Flags() {
 			return resData;
 		},
 	});
-
-	const [selected, setSelected] = useState(-1);
-	const changeSelected = (num: number) => {
-		// if already selected unselect
-		if (selected === num) setSelected(selected);
-		setSelected(num);
-	};
 
 	const { refetch } = useQuery({
 		queryKey: ["getFlagAnswer"],
@@ -58,10 +53,26 @@ export function Flags() {
 		enabled: false,
 	});
 
+	// local state
+
+	const [selected, setSelected] = useState(-1);
+	const changeSelected = (num: number) => {
+		// if already selected unselect
+		if (selected === num) setSelected(selected);
+		setSelected(num);
+	};
+
 	const handleAnswer = () => refetch();
 
-	if (isLoading) return <Spinner size={"xl"} m={4}></Spinner>;
-	if (error) return <Text>Couldn't load anything</Text>;
+	// render
+
+	if (isLoading) {
+		return <Spinner size={"xl"} m={4}></Spinner>;
+	}
+
+	if (error) {
+		return <Text>Couldn't load anything</Text>;
+	}
 
 	return (
 		<Card
