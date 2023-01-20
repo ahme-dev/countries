@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Spinner, Text, useToast } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Play } from "../components/Play";
