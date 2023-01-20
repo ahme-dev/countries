@@ -5,15 +5,21 @@ import { Nav } from "./components/Nav";
 import { Capitals } from "./pages/Capitals";
 import { Flags } from "./pages/Flags";
 import { Main } from "./pages/Main";
+import { useTranslation } from "react-i18next";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
 function App() {
+	const { i18n } = useTranslation();
+
 	return (
 		<QueryClientProvider client={queryClient}>
-			<Container maxW="container.lg">
+			<Container
+				maxW="container.lg"
+				dir={i18n.language === "kur" ? "rtl" : "ltr"}
+			>
 				<Flex
 					sx={{ minHeight: "100vh" }}
 					direction={"column"}

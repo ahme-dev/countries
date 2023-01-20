@@ -28,8 +28,11 @@ import {
 } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import Logo from "../../logo.png";
+import { useTranslation } from "react-i18next";
 
 export function Nav() {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<Flex
 			direction={"row"}
@@ -40,7 +43,7 @@ export function Nav() {
 				<Center gap={2}>
 					<Image borderRadius={"md"} p={1} h={12} src={Logo} />
 					<Text fontSize={"xl"} fontWeight={"bold"}>
-						Countries
+						{t("Countries")}
 					</Text>
 				</Center>
 			</Link>
@@ -54,6 +57,7 @@ export function Nav() {
 
 function DesktopNav() {
 	const { colorMode, toggleColorMode } = useColorMode();
+	const { i18n } = useTranslation();
 
 	return (
 		<>
@@ -71,7 +75,12 @@ function DesktopNav() {
 				<Menu>
 					<MenuButton as={IconButton} icon={<ChatIcon />} />
 					<MenuList>
-						<MenuItem>English</MenuItem>
+						<MenuItem onClick={() => i18n.changeLanguage("eng")}>
+							English
+						</MenuItem>
+						<MenuItem onClick={() => i18n.changeLanguage("kur")}>
+							Kurdish
+						</MenuItem>
 					</MenuList>
 				</Menu>
 				<IconButton
@@ -87,6 +96,7 @@ function DesktopNav() {
 function MobileMenu() {
 	const { setColorMode } = useColorMode();
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { i18n } = useTranslation();
 
 	return (
 		<Flex display={{ base: "flex", sm: "none" }}>
@@ -127,7 +137,18 @@ function MobileMenu() {
 							>
 								<Text fontWeight={"bold"}>Language:</Text>
 								<ButtonGroup isAttached variant={"outline"}>
-									<Button aria-label="Switch to english">Eng</Button>
+									<Button
+										onClick={() => i18n.changeLanguage("eng")}
+										aria-label="Switch to english"
+									>
+										Eng
+									</Button>
+									<Button
+										onClick={() => i18n.changeLanguage("kur")}
+										aria-label="Switch to kurdish"
+									>
+										Kur
+									</Button>
 								</ButtonGroup>
 							</Flex>
 							{/* Language end */}
