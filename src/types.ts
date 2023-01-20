@@ -16,9 +16,9 @@ export interface Capital {
 export type CapitalWithoutAnswer = Omit<Capital, "answer">;
 
 export interface Answer {
-	correctAnswer: boolean;
+	correctAnswer: string;
 	userAnswer: string;
-	isCorrect: string;
+	isCorrect: boolean;
 	flag: string;
 }
 

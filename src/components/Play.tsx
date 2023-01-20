@@ -31,7 +31,7 @@ export function Play(props: {
 	clearHistory: () => void;
 	handleAnswer: (selected: string) => void;
 }) {
-	const [selected, setSelected] = useState(-1);
+	const [selected, setSelected] = useState(1);
 	const changeSelected = (num: number) => {
 		// if already selected unselect
 		if (selected === num) setSelected(selected);

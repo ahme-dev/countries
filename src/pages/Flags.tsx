@@ -1,7 +1,8 @@
 import { Spinner, Text, useToast } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { Play } from "../components/Play";
-import { Flag, UserResponse } from "../types";
+import { Answer, Flag, UserResponse } from "../types";
 
 // types
 
@@ -29,15 +30,33 @@ export function Flags() {
 		isLoading: userIsLoading,
 		data: userData,
 		error: userError,
+		refetch: userRefetch,
 	} = useQuery({
 		queryKey: ["getUser"],
 		queryFn: async () => {
-			const res = await fetch(
+			let res = await axios.get(
 				"https://countries-backend.ahmed.systems/users/ahmed",
 			);
-			const resData = await res.json();
-			return resData as UserResponse;
+			console.log(res.data);
+			return res.data as UserResponse;
 		},
+	});
+
+	const mutation = useMutation({
+		mutationFn: (answer: { answer: Answer }) => {
+			return axios.patch(
+				"https://countries-backend.ahmed.systems/users/ahmed/flags",
+				answer,
+			);
+		},
+		onSuccess: () => userRefetch(),
+		onError: () =>
+			toast({
+				title: "Failed to push answers",
+				status: "error",
+				duration: 3000,
+				variant: "solid",
+			}),
 	});
 
 	// handle
@@ -53,11 +72,20 @@ export function Flags() {
 			duration: 3000,
 			variant: "solid",
 		});
+
+		mutation.mutate({
+			answer: {
+				flag: flagsData[userData.flags.index].flag,
+				correctAnswer: flagsData[userData.flags.index].answer,
+				userAnswer: selectedVariant,
+				isCorrect: flagsData[userData.flags.index].answer === selectedVariant,
+			},
+		});
 	};
 
 	// render
 
-	if (flagsAreLoading || userIsLoading) {
+	if (flagsAreLoading || userIsLoading || mutation.isLoading) {
 		return <Spinner size={"xl"} m={4}></Spinner>;
 	}
 
