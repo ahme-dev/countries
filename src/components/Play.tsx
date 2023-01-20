@@ -21,11 +21,12 @@ import {
 	Badge,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Answer } from "../types";
 
 export function Play(props: {
 	flag: string;
 	variants: string[];
-	history: any[];
+	history: Answer[];
 	clearHistory: () => void;
 	handleAnswer: (selected: string) => void;
 }) {
@@ -133,7 +134,7 @@ export function Play(props: {
 													py={1}
 													px={2}
 													borderRadius={"lg"}
-													colorScheme={el.wasCorrect ? "green" : "red"}
+													colorScheme={el.isCorrect ? "green" : "red"}
 												>
 													<Flex w={"full"} gap={2} alignItems={"center"}>
 														<Image
@@ -142,12 +143,12 @@ export function Play(props: {
 															src={el.flag}
 														/>
 														<Flex direction={"column"}>
-															{el.wasCorrect ? (
+															{el.isCorrect ? (
 																<Text as="b">{el.userAnswer}</Text>
 															) : (
 																<>
 																	<Text as="del">{el.userAnswer}</Text>
-																	<Text as="b">{el.answer}</Text>
+																	<Text as="b">{el.correctAnswer}</Text>
 																</>
 															)}
 														</Flex>
