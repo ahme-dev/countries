@@ -1,11 +1,9 @@
 import { Spinner, Text, useToast } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import { Play } from "../components/Play";
 
 export function Flags() {
 	const toast = useToast();
-	const [index, setIndex] = useState(1);
 
 	// fetch
 
@@ -28,10 +26,35 @@ export function Flags() {
 		},
 	});
 
+	const {
+		// isLoading: userIsLoading,
+		data: userData,
+		// error: userError,
+	} = useQuery({
+		queryKey: ["getFlags"],
+		queryFn: async () => {
+			const res = await fetch(
+				"https://countries-backend.ahmed.systems/users/ahmed",
+			);
+			const resData = await res.json();
+			return resData satisfies {
+				username: string;
+				flags: {
+					index: number;
+					results: any[];
+				};
+				capitals: {
+					index: number;
+					results: any[];
+				};
+			};
+		},
+	});
+
 	// handle
 
 	const handleAnswer = (selectedVariant: string) => {
-		let isCorrect = selectedVariant === flagsData[index].answer;
+		let isCorrect = selectedVariant === flagsData[userData].answer;
 
 		toast({
 			title: `Answer was ${isCorrect ? "correct" : "incorrect"}`,
@@ -39,8 +62,6 @@ export function Flags() {
 			duration: 3000,
 			variant: "solid",
 		});
-
-		setIndex(index + 1);
 	};
 
 	// render
@@ -56,8 +77,8 @@ export function Flags() {
 	if (true) {
 		return (
 			<Play
-				flag={flagsData[index].flag}
-				variants={flagsData[index].variants}
+				flag={flagsData[userData.flags.index].flag}
+				variants={flagsData[userData.flags.index].variants}
 				handleAnswer={handleAnswer}
 				history={[]}
 				clearHistory={() => {}}
