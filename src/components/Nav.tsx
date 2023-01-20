@@ -31,7 +31,7 @@ import Logo from "../../logo.png";
 import { useTranslation } from "react-i18next";
 
 export function Nav() {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<Flex
@@ -57,7 +57,7 @@ export function Nav() {
 
 function DesktopNav() {
 	const { colorMode, toggleColorMode } = useColorMode();
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	return (
 		<>
@@ -65,7 +65,7 @@ function DesktopNav() {
 			<Flex gap={4} display={{ base: "none", sm: "flex" }}>
 				{["Capitals", "Flags"].map((el, i) => (
 					<Link key={i} to={"/" + el.toLowerCase()}>
-						<Button fontWeight={"bold"}>{el}</Button>
+						<Button fontWeight={"bold"}>{t(el)}</Button>
 					</Link>
 				))}
 			</Flex>
@@ -76,10 +76,10 @@ function DesktopNav() {
 					<MenuButton as={IconButton} icon={<ChatIcon />} />
 					<MenuList>
 						<MenuItem onClick={() => i18n.changeLanguage("eng")}>
-							English
+							{t("English")}
 						</MenuItem>
 						<MenuItem onClick={() => i18n.changeLanguage("kur")}>
-							Kurdish
+							{t("Kurdish")}
 						</MenuItem>
 					</MenuList>
 				</Menu>
@@ -96,7 +96,7 @@ function DesktopNav() {
 function MobileMenu() {
 	const { setColorMode } = useColorMode();
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	return (
 		<Flex display={{ base: "flex", sm: "none" }}>
@@ -110,17 +110,22 @@ function MobileMenu() {
 			</IconButton>
 
 			{/* Drawer Menu */}
-			<Drawer isOpen={isOpen} placement="right" closeOnEsc onClose={onClose}>
+			<Drawer
+				isOpen={isOpen}
+				placement={i18n.language === "kur" ? "left" : "right"}
+				closeOnEsc
+				onClose={onClose}
+			>
 				<DrawerOverlay />
 				<DrawerContent>
-					<DrawerHeader>Menu</DrawerHeader>
+					<DrawerHeader>{t("Menu")}</DrawerHeader>
 
 					<DrawerBody>
 						<Flex h={"full"} direction={"column"} gap={4}>
 							{["Capitals", "Flags"].map((el, i) => (
 								<Link key={i} to={"/" + el.toLowerCase()}>
 									<Button w={"full"} variant={"outline"} fontWeight={"bold"}>
-										{el}
+										{t(el)}
 									</Button>
 								</Link>
 							))}
@@ -135,19 +140,19 @@ function MobileMenu() {
 								justifyContent={"space-between"}
 								gap={2}
 							>
-								<Text fontWeight={"bold"}>Language:</Text>
+								<Text fontWeight={"bold"}>{t("Language")}</Text>
 								<ButtonGroup isAttached variant={"outline"}>
 									<Button
 										onClick={() => i18n.changeLanguage("eng")}
 										aria-label="Switch to english"
 									>
-										Eng
+										{t("Eng")}
 									</Button>
 									<Button
 										onClick={() => i18n.changeLanguage("kur")}
 										aria-label="Switch to kurdish"
 									>
-										Kur
+										{t("Kur")}
 									</Button>
 								</ButtonGroup>
 							</Flex>
@@ -158,7 +163,7 @@ function MobileMenu() {
 								justifyContent={"space-between"}
 								gap={2}
 							>
-								<Text fontWeight={"bold"}>Theme:</Text>
+								<Text fontWeight={"bold"}>{t("Theme")}</Text>
 								<ButtonGroup isAttached variant={"outline"}>
 									<IconButton
 										aria-label="Switch to dark theme"
@@ -178,7 +183,7 @@ function MobileMenu() {
 								onClick={onClose}
 								leftIcon={<SmallCloseIcon />}
 							>
-								Close
+								{t("Close")}
 							</Button>
 						</Flex>
 					</DrawerFooter>

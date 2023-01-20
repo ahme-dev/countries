@@ -21,6 +21,7 @@ import {
 	Badge,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Answer } from "../types";
 
 export function Play(props: {
@@ -31,6 +32,7 @@ export function Play(props: {
 	clearHistory: () => void;
 	handleAnswer: (selected: string) => void;
 }) {
+	const { t, i18n } = useTranslation();
 	const [selected, setSelected] = useState(1);
 	const changeSelected = (num: number) => {
 		// if already selected unselect
@@ -73,8 +75,8 @@ export function Play(props: {
 					{/* Question Text */}
 					<Heading size={"md"}>
 						{props.country
-							? `What is the capital of ${props.country}`
-							: "What country does this flag belong to"}
+							? t("What is the capital of") + props.country + "?"
+							: t("What country does this flag belong to?")}
 					</Heading>
 					{/* Question Text End */}
 
@@ -105,7 +107,7 @@ export function Play(props: {
 								<PopoverArrow />
 								<PopoverHeader>
 									<Flex justifyContent={"space-between"} alignItems={"center"}>
-										<Text>Answer history:</Text>
+										<Text>{t("Answer history")}</Text>
 										<IconButton
 											onClick={() => props.clearHistory()}
 											size={"xs"}
@@ -131,7 +133,7 @@ export function Play(props: {
 												borderRadius={"lg"}
 												colorScheme={"blue"}
 											>
-												Empty
+												{t("Empty")}
 											</Badge>
 										) : (
 											// When There is history
@@ -176,7 +178,7 @@ export function Play(props: {
 							onClick={() => props.handleAnswer(props.variants[selected])}
 							leftIcon={<CheckCircleIcon />}
 						>
-							Answer
+							{t("Answer")}
 						</Button>
 						{/* Answer button end */}
 					</Flex>
