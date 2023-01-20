@@ -1,4 +1,4 @@
-import { CheckCircleIcon, DeleteIcon, TimeIcon } from "@chakra-ui/icons";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
 	Center,
 	Button,
