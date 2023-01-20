@@ -26,11 +26,9 @@ export function Play(props: {
 	flag: string;
 	variants: string[];
 	history: any[];
-	clearHistory: () => {};
-	handleAnswer: (selected: number) => {};
+	clearHistory: () => void;
+	handleAnswer: (selected: string) => void;
 }) {
-	// local state
-
 	const [selected, setSelected] = useState(-1);
 	const changeSelected = (num: number) => {
 		// if already selected unselect
@@ -116,7 +114,7 @@ export function Play(props: {
 										gap={2}
 									>
 										{/* When history is empty */}
-										{history.length === 0 ? (
+										{props.history.length === 0 ? (
 											<Badge
 												w={"full"}
 												py={1}
@@ -166,7 +164,7 @@ export function Play(props: {
 						{/* Answer button */}
 						<Button
 							w={"full"}
-							onClick={() => props.handleAnswer(selected)}
+							onClick={() => props.handleAnswer(props.variants[selected])}
 							leftIcon={<CheckCircleIcon />}
 						>
 							Answer

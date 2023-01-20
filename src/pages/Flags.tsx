@@ -1,47 +1,43 @@
 import { Spinner, Text, useToast } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
 import { Play } from "../components/Play";
 
 export function Flags() {
 	const toast = useToast();
 
-	// server data
-
-	// const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 	const {
 		isLoading,
-		data: flagData,
+		data: flagsData,
 		error,
 	} = useQuery({
 		queryKey: ["getFlag"],
 		queryFn: async () => {
-			const res = await fetch(
-				"https://countries-backend.ahmed.systems/flags/2",
-			);
+			const res = await fetch("https://countries-backend.ahmed.systems/flags");
 			const resData = await res.json();
-			return resData satisfies { flag: string; variants: string[] };
+			return resData satisfies {
+				flag: string;
+				variants: string[];
+				answer: string;
+			};
 		},
 	});
 
-	const { refetch } = useQuery({
-		queryKey: ["getFlagAnswer"],
-		queryFn: async () => {
-			const res = await fetch(
-				`https://countries-backend.ahmed.systems/flags/2?answer=${flagData.variants[0]}`,
-			);
-			const resData = await res.json();
-			return resData satisfies string;
-		},
-		onSuccess: (parData) => {
-			toast({
-				title: `Answer was ${parData.isCorrect ? "correct" : "incorrect"}`,
-				status: parData.isCorrect ? "success" : "error",
-				duration: 3000,
-				variant: "solid",
-			});
-		},
-		enabled: false,
-	});
+	const [index, setIndex] = useState(1);
+
+	const handleAnswer = (selectedVariant: string) => {
+		let isCorrect = selectedVariant === flagsData[index].answer;
+
+		toast({
+			title: `Answer was ${isCorrect ? "correct" : "incorrect"}`,
+			status: isCorrect ? "success" : "error",
+			duration: 3000,
+			variant: "solid",
+		});
+
+		setIndex(index + 1);
+	};
 
 	// render
 
@@ -56,8 +52,9 @@ export function Flags() {
 	if (true) {
 		return (
 			<Play
-				{...flagData}
-				handleAnswer={() => refetch()}
+				flag={flagsData[index].flag}
+				variants={flagsData[index].variants}
+				handleAnswer={handleAnswer}
 				history={[]}
 				clearHistory={() => {}}
 			/>
