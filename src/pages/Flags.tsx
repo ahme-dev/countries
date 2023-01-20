@@ -27,11 +27,11 @@ export function Flags() {
 	});
 
 	const {
-		// isLoading: userIsLoading,
+		isLoading: userIsLoading,
 		data: userData,
-		// error: userError,
+		error: userError,
 	} = useQuery({
-		queryKey: ["getFlags"],
+		queryKey: ["getUser"],
 		queryFn: async () => {
 			const res = await fetch(
 				"https://countries-backend.ahmed.systems/users/ahmed",
@@ -66,11 +66,11 @@ export function Flags() {
 
 	// render
 
-	if (flagsAreLoading) {
+	if (flagsAreLoading || userIsLoading) {
 		return <Spinner size={"xl"} m={4}></Spinner>;
 	}
 
-	if (flagsError) {
+	if (flagsError || userError) {
 		return <Text>Couldn't load anything</Text>;
 	}
 
@@ -80,7 +80,7 @@ export function Flags() {
 				flag={flagsData[userData.flags.index].flag}
 				variants={flagsData[userData.flags.index].variants}
 				handleAnswer={handleAnswer}
-				history={[]}
+				history={userData.flags.results}
 				clearHistory={() => {}}
 			/>
 		);
