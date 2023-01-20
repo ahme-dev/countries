@@ -143,13 +143,13 @@ function MobileMenu() {
 								<Text fontWeight={"bold"}>{t("Language")}</Text>
 								<ButtonGroup isAttached variant={"outline"}>
 									<Button
-										onClick={() => i18n.changeLanguage("eng")}
+										onClick={() => i18n.changeLanguage("en")}
 										aria-label="Switch to english"
 									>
 										{t("Eng")}
 									</Button>
 									<Button
-										onClick={() => i18n.changeLanguage("kur")}
+										onClick={() => i18n.changeLanguage("ku")}
 										aria-label="Switch to kurdish"
 									>
 										{t("Kur")}
