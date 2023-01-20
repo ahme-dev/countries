@@ -24,6 +24,7 @@ import { useState } from "react";
 import { Answer } from "../types";
 
 export function Play(props: {
+	country?: string;
 	flag: string;
 	variants: string[];
 	history: Answer[];
@@ -69,7 +70,14 @@ export function Play(props: {
 			{/* Body */}
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
-					<Heading size={"md"}>What country does this flag belong to?</Heading>
+					{/* Question Text */}
+					<Heading size={"md"}>
+						{props.country
+							? `What is the capital of ${props.country}`
+							: "What country does this flag belong to"}
+					</Heading>
+					{/* Question Text End */}
+
 					{/* Choices */}
 					<SimpleGrid columns={{ base: 1, md: 2 }} spacing={2}>
 						{props.variants.map((el: any, i: number) => (

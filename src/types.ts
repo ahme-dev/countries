@@ -7,6 +7,7 @@ export interface Flag {
 export type FlagWithoutAnswer = Omit<Flag, "answer">;
 
 export interface Capital {
+	country: string;
 	flag: string;
 	variants: string[];
 	answer: string;
