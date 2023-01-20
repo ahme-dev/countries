@@ -30,6 +30,6 @@ export interface UserResponse {
 	};
 	capitals: {
 		index: number;
-		results: Answer[];
+		answers: Answer[];
 	};
 }

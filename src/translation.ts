@@ -7,7 +7,7 @@ const resources = {
 			Countries: "وڵاتان",
 			Capitals: "پایتەختەکان",
 			Flags: "ئاڵاکان",
-			"What country does this flag belong to?": "ئەم ئاڵایە ئی جی وڵاتێکە؟",
+			"What country does this flag belong to?": "ئەم ئاڵایە ئی چی وڵاتێکە؟",
 			"What is the capital of": "پەیتەختی ئەم وڵاتە کوێیە",
 			Answer: "وەڵامبدەوە",
 			"Answer history": "مێژووی وەڵامەکان",
