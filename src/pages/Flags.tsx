@@ -10,13 +10,15 @@ export function Flags() {
 	// fetch
 
 	const {
-		isLoading,
+		isLoading: flagsAreLoading,
 		data: flagsData,
-		error,
+		error: flagsError,
 	} = useQuery({
-		queryKey: ["getFlag"],
+		queryKey: ["getFlags"],
 		queryFn: async () => {
-			const res = await fetch("https://countries-backend.ahmed.systems/flags");
+			const res = await fetch(
+				"https://countries-backend.ahmed.systems/flags/en",
+			);
 			const resData = await res.json();
 			return resData satisfies {
 				flag: string;
@@ -43,11 +45,11 @@ export function Flags() {
 
 	// render
 
-	if (isLoading) {
+	if (flagsAreLoading) {
 		return <Spinner size={"xl"} m={4}></Spinner>;
 	}
 
-	if (error) {
+	if (flagsError) {
 		return <Text>Couldn't load anything</Text>;
 	}
 
