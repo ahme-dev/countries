@@ -1,0 +1,15 @@
+@font-face {
+	font-family: "NizarART";
+	src: local("NizarART"), url("../public/NizarART.woff") format("truetype");
+	font-weight: regular;
+}
+
+.app {
+	font-family: "NizarART";
+}
+
+.app *,
+*::before,
+*::after {
+	font-family: inherit;
+}

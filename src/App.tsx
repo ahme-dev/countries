@@ -9,6 +9,10 @@ import { useTranslation } from "react-i18next";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+// add font
+import "../public/NizarART.woff";
+import "./App.css";
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -19,6 +23,7 @@ function App() {
 			<Container
 				maxW="container.lg"
 				dir={i18n.language === "kur" ? "rtl" : "ltr"}
+				className="app"
 			>
 				<Flex
 					sx={{ minHeight: "100vh" }}
