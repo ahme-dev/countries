@@ -37,7 +37,6 @@ export function Capitals() {
 			let res = await axios.get(
 				"https://countries-backend.ahmed.systems/users/ahmed",
 			);
-			console.log(res.data);
 			return res.data as UserResponse;
 		},
 	});

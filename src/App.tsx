@@ -22,7 +22,7 @@ function App() {
 		<QueryClientProvider client={queryClient}>
 			<Container
 				maxW="container.lg"
-				dir={i18n.language === "kur" ? "rtl" : "ltr"}
+				dir={i18n.language === "ku" ? "rtl" : "ltr"}
 				className="app"
 			>
 				<Flex

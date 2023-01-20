@@ -75,10 +75,10 @@ function DesktopNav() {
 				<Menu>
 					<MenuButton as={IconButton} icon={<ChatIcon />} />
 					<MenuList>
-						<MenuItem onClick={() => i18n.changeLanguage("eng")}>
+						<MenuItem onClick={() => i18n.changeLanguage("en")}>
 							{t("English")}
 						</MenuItem>
-						<MenuItem onClick={() => i18n.changeLanguage("kur")}>
+						<MenuItem onClick={() => i18n.changeLanguage("ku")}>
 							{t("Kurdish")}
 						</MenuItem>
 					</MenuList>
@@ -112,7 +112,7 @@ function MobileMenu() {
 			{/* Drawer Menu */}
 			<Drawer
 				isOpen={isOpen}
-				placement={i18n.language === "kur" ? "left" : "right"}
+				placement={i18n.language === "ku" ? "left" : "right"}
 				closeOnEsc
 				onClose={onClose}
 			>

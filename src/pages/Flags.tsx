@@ -1,6 +1,7 @@
 import { Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import { Play } from "../components/Play";
 import { Answer, Flag, UserResponse } from "../types";
 
@@ -8,6 +9,7 @@ import { Answer, Flag, UserResponse } from "../types";
 
 export function Flags() {
 	const toast = useToast();
+	const { i18n } = useTranslation();
 
 	// fetch
 
@@ -16,10 +18,10 @@ export function Flags() {
 		data: flagsData,
 		error: flagsError,
 	} = useQuery({
-		queryKey: ["getFlags"],
+		queryKey: ["getFlags", i18n.language],
 		queryFn: async () => {
 			const res = await fetch(
-				"https://countries-backend.ahmed.systems/flags/en",
+				`https://countries-backend.ahmed.systems/flags/${i18n.language}`,
 			);
 			const resData = await res.json();
 			return resData as Flag[];
@@ -37,7 +39,6 @@ export function Flags() {
 			let res = await axios.get(
 				"https://countries-backend.ahmed.systems/users/ahmed",
 			);
-			console.log(res.data);
 			return res.data as UserResponse;
 		},
 	});

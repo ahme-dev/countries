@@ -2,7 +2,7 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
 const resources = {
-	kur: {
+	ku: {
 		translation: {
 			Countries: "وڵاتان",
 			Capitals: "پایتەختەکان",
@@ -26,7 +26,7 @@ const resources = {
 
 i18n.use(initReactI18next).init({
 	resources,
-	lng: "kur",
+	lng: "en",
 	interpolation: {
 		escapeValue: false,
 	},
