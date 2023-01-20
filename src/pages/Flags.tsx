@@ -1,12 +1,14 @@
 import { Spinner, Text, useToast } from "@chakra-ui/react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Play } from "../components/Play";
 
 export function Flags() {
 	const toast = useToast();
+	const [index, setIndex] = useState(1);
 
-	const queryClient = useQueryClient();
+	// fetch
+
 	const {
 		isLoading,
 		data: flagsData,
@@ -24,7 +26,7 @@ export function Flags() {
 		},
 	});
 
-	const [index, setIndex] = useState(1);
+	// handle
 
 	const handleAnswer = (selectedVariant: string) => {
 		let isCorrect = selectedVariant === flagsData[index].answer;
