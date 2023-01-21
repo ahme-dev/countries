@@ -77,6 +77,7 @@ export function Play(props: {
 						{props.variants.map((el: any, i: number) => (
 							<Button
 								onClick={() => changeSelected(i)}
+								// using index as key id not optimal
 								key={i}
 								borderColor={selected === i ? "purple.400" : "transparent"}
 								borderWidth={selected === i ? 2 : 0}

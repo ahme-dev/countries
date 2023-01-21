@@ -60,6 +60,7 @@ export function PlayHistory(props: {
 							[...props.history].reverse().map((el, i) => (
 								<Badge
 									w={"full"}
+									// using index as key is not optimal
 									key={i}
 									py={1}
 									px={2}
