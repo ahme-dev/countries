@@ -22,7 +22,7 @@ export function PlayHistory(props: {
 	const { t } = useTranslation();
 
 	return (
-		<Popover>
+		<Popover isLazy>
 			<PopoverTrigger>
 				<IconButton aria-label="History button">
 					<TimeIcon />
