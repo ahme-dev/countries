@@ -3,13 +3,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { Play } from "../components/Play";
-import { Answer, Flag, UserResponse } from "../types";
+import { Answer, FlagsResponse, UserResponse } from "../types";
 
 // types
 
 export function Flags() {
 	const toast = useToast();
 	const { i18n, t } = useTranslation();
+	const lang = i18n.language as "en" | "ku";
 
 	// fetch
 
@@ -18,13 +19,12 @@ export function Flags() {
 		data: flagsData,
 		error: flagsError,
 	} = useQuery({
-		queryKey: ["getFlags", i18n.language],
+		queryKey: ["getFlags"],
 		queryFn: async () => {
-			const res = await fetch(
-				`https://countries-backend.ahmed.systems/flags/${i18n.language}`,
-			);
+			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
 			const resData = await res.json();
-			return resData as Flag[];
+			console.log(resData);
+			return resData as FlagsResponse;
 		},
 	});
 
@@ -65,7 +65,8 @@ export function Flags() {
 	const handleAnswer = (selectedVariant: string) => {
 		if (!flagsData || !userData) return;
 
-		let isCorrect = selectedVariant === flagsData[userData.flags.index].answer;
+		let isCorrect =
+			selectedVariant === flagsData[lang][userData.flags.index].answer;
 
 		toast({
 			title: t(`Answer was ${isCorrect ? "correct" : "incorrect"}`),
@@ -73,16 +74,17 @@ export function Flags() {
 			duration: 3000,
 			variant: "solid",
 			containerStyle: {
-				fontFamily: "NizarART"
-			}
+				fontFamily: "NizarART",
+			},
 		});
 
 		mutation.mutate({
 			answer: {
-				flag: flagsData[userData.flags.index].flag,
-				correctAnswer: flagsData[userData.flags.index].answer,
+				flag: flagsData[lang][userData.flags.index].flag,
+				correctAnswer: flagsData[lang][userData.flags.index].answer,
 				userAnswer: selectedVariant,
-				isCorrect: flagsData[userData.flags.index].answer === selectedVariant,
+				isCorrect:
+					flagsData[lang][userData.flags.index].answer === selectedVariant,
 			},
 		});
 	};
@@ -100,8 +102,8 @@ export function Flags() {
 	if (true) {
 		return (
 			<Play
-				flag={flagsData[userData.flags.index].flag}
-				variants={flagsData[userData.flags.index].variants}
+				flag={flagsData[lang][userData.flags.index].flag}
+				variants={flagsData[lang][userData.flags.index].variants}
 				handleAnswer={handleAnswer}
 				history={userData.flags.answers}
 				clearHistory={() => {}}

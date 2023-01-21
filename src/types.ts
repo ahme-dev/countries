@@ -6,6 +6,11 @@ export interface Flag {
 
 export type FlagWithoutAnswer = Omit<Flag, "answer">;
 
+export interface FlagsResponse {
+	en: Flag[];
+	ku: Flag[];
+}
+
 export interface Capital {
 	country: string;
 	flag: string;
