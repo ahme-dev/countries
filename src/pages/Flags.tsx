@@ -23,7 +23,6 @@ export function Flags() {
 		queryFn: async () => {
 			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
 			const resData = await res.json();
-			console.log(resData);
 			return resData as FlagsResponse;
 		},
 	});
