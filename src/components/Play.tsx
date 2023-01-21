@@ -22,7 +22,7 @@ export function Play(props: {
 	variants: string[];
 	history: Answer[];
 	clearHistory: () => void;
-	handleAnswer: (selected: string) => void;
+	handleAnswer: (selected: number) => void;
 }) {
 	const { t } = useTranslation();
 	const [selected, setSelected] = useState(1);
@@ -99,7 +99,7 @@ export function Play(props: {
 						{/* Answer button */}
 						<Button
 							w={"full"}
-							onClick={() => props.handleAnswer(props.variants[selected])}
+							onClick={() => props.handleAnswer(selected)}
 							leftIcon={<CheckCircleIcon />}
 						>
 							{t("Answer")}

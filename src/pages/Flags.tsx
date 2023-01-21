@@ -64,12 +64,15 @@ export function Flags() {
 
 	// handle
 
-	const handleAnswer = (selectedVariant: string) => {
+	const handleAnswer = (selected: number) => {
 		if (!flagsData || !userData) return;
 
-		let isCorrect =
-			selectedVariant === flagsData[lang][userData.flags.index].answer;
+		// always compare answers in english
+		let userAnswer = flagsData["en"][userData.flags.index].variants[selected];
+		let correctAnswer = flagsData["en"][userData.flags.index].answer;
+		let isCorrect = userAnswer === correctAnswer;
 
+		// show toast
 		toast({
 			title: t(`Answer was ${isCorrect ? "correct" : "incorrect"}`),
 			status: isCorrect ? "success" : "error",
@@ -80,13 +83,13 @@ export function Flags() {
 			},
 		});
 
+		// send data to server
 		mutation.mutate({
 			answer: {
 				flag: flagsData[lang][userData.flags.index].flag,
-				correctAnswer: flagsData[lang][userData.flags.index].answer,
-				userAnswer: selectedVariant,
-				isCorrect:
-					flagsData[lang][userData.flags.index].answer === selectedVariant,
+				correctAnswer,
+				userAnswer,
+				isCorrect,
 			},
 		});
 	};
