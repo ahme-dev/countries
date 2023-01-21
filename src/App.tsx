@@ -2,7 +2,7 @@ import { Center, Container, Flex } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
-import { Capitals } from "./pages/Capitals";
+// import { Capitals } from "./pages/Capitals";
 import { Flags } from "./pages/Flags";
 import { Main } from "./pages/Main";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,7 @@ function App() {
 					<Center>
 						<Routes>
 							<Route path={"/"} element={<Main></Main>} />
-							<Route path={"/capitals"} element={<Capitals></Capitals>} />
+							{/* <Route path={"/capitals"} element={<Capitals></Capitals>} /> */}
 							<Route path={"/flags"} element={<Flags></Flags>} />
 						</Routes>
 					</Center>
