@@ -68,9 +68,12 @@ export function Flags() {
 		if (!flagsData || !userData) return;
 
 		// always compare answers in english
-		let userAnswer = flagsData["en"][userData.flags.index].variants[selected];
-		let correctAnswer = flagsData["en"][userData.flags.index].answer;
-		let isCorrect = userAnswer === correctAnswer;
+		let userAnswerEn = flagsData["en"][userData.flags.index].variants[selected];
+		let correctAnswerEn = flagsData["en"][userData.flags.index].answer;
+		let isCorrect = userAnswerEn === correctAnswerEn;
+
+		let userAnswer = flagsData[lang][userData.flags.index].variants[selected];
+		let correctAnswer = flagsData[lang][userData.flags.index].answer;
 
 		// show toast
 		toast({
