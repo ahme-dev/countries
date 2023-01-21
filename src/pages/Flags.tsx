@@ -14,6 +14,7 @@ export function Flags() {
 
 	// fetch
 
+	// fetch flags data
 	const {
 		isLoading: flagsAreLoading,
 		data: flagsData,
@@ -27,6 +28,7 @@ export function Flags() {
 		},
 	});
 
+	// fetch user data
 	const {
 		isLoading: userIsLoading,
 		data: userData,
@@ -42,6 +44,7 @@ export function Flags() {
 		},
 	});
 
+	// add result to users answers
 	const mutation = useMutation({
 		mutationFn: (answer: { answer: Answer }) => {
 			return axios.patch(
