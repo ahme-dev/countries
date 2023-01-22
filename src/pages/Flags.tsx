@@ -1,4 +1,4 @@
-import { Spinner, Text, useToast } from "@chakra-ui/react";
+import { Box, Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
@@ -99,8 +99,31 @@ export function Flags() {
 
 	// render
 
-	if (flagsAreLoading || userIsLoading || mutation.isLoading) {
-		return <Spinner size={"xl"} m={4}></Spinner>;
+	if (flagsAreLoading) {
+		return (
+			<Center flexDirection={"column"}>
+				<Spinner size={"xl"} m={4}></Spinner>
+				<Text>Loading flags data...</Text>
+			</Center>
+		);
+	}
+
+	if (userIsLoading) {
+		return (
+			<Center flexDirection={"column"}>
+				<Spinner size={"xl"} m={4}></Spinner>
+				<Text>Loading user data...</Text>
+			</Center>
+		);
+	}
+
+	if (mutation.isLoading) {
+		return (
+			<Center flexDirection={"column"}>
+				<Text>Loading new question...</Text>
+				<Spinner size={"xl"} m={4}></Spinner>
+			</Center>
+		);
 	}
 
 	if (flagsError || userError || !flagsData || !userData) {
