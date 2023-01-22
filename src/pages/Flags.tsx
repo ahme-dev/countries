@@ -1,4 +1,4 @@
-import { Box, Center, Spinner, Text, useToast } from "@chakra-ui/react";
+import { Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
