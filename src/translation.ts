@@ -17,6 +17,10 @@ const resources = {
 			Answer: "وەڵامبدەوە",
 			"Answer history": "مێژووی وەڵامەکان",
 
+			"Loading user data...": "وا زانیاری بەکارهێنەر ڕائەکێشرێ...",
+			"Loading flags data...": "وا زانیاری ئاڵاکان ڕائەکێشرێ...",
+			"Saving answer...": "وا وەڵامەکە خەزنئەکرێت...",
+
 			"Welcome to the Countries app": "بەخێربێیت بۆ ئاپی وڵاتان",
 			"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.":
 				"دوو یاریمان هەیە، یەکێکیان بۆ زانینی پایتەختی وڵاتێک، دانەیەکیش بۆ زانینی ناوی وڵاتێک بە ئاڵاکەیا.",

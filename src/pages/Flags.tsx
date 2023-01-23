@@ -100,7 +100,7 @@ export function Flags() {
 		return (
 			<Center flexDirection={"column"}>
 				<Spinner size={"xl"} m={4}></Spinner>
-				<Text>Loading flags data...</Text>
+				<Text>{t("Loading flags data...")}</Text>
 			</Center>
 		);
 	}
@@ -109,7 +109,7 @@ export function Flags() {
 		return (
 			<Center flexDirection={"column"}>
 				<Spinner size={"xl"} m={4}></Spinner>
-				<Text>Loading user data...</Text>
+				<Text>{t("Loading user data...")}</Text>
 			</Center>
 		);
 	}
@@ -117,7 +117,7 @@ export function Flags() {
 	if (mutation.isLoading) {
 		return (
 			<Center flexDirection={"column"}>
-				<Text>Loading new question...</Text>
+				<Text>{t("Saving answer...")}</Text>
 				<Spinner size={"xl"} m={4}></Spinner>
 			</Center>
 		);
