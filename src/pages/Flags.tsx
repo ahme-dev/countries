@@ -81,9 +81,6 @@ export function Flags() {
 			status: isCorrect ? "success" : "error",
 			duration: 3000,
 			variant: "solid",
-			containerStyle: {
-				fontFamily: "NizarART",
-			},
 		});
 
 		// send data to server

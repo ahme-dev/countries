@@ -65,7 +65,7 @@ export function Play(props: {
 			<CardBody>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					{/* Question Text */}
-					<Heading fontFamily={"NizarART"} size={"md"}>
+					<Heading size={"md"}>
 						{props.country
 							? t("What is the capital of") + props.country + "?"
 							: t("What country does this flag belong to?")}
