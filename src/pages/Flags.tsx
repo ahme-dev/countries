@@ -37,9 +37,7 @@ export function Flags() {
 	} = useQuery({
 		queryKey: ["getUser"],
 		queryFn: async () => {
-			let res = await axios.get(
-				"https://countries-backend.ahmed.systems/users/ahmed",
-			);
+			let res = await axios.get("https://countries-backend.ahmed.systems/user");
 			return res.data as UserResponse;
 		},
 	});
@@ -48,7 +46,7 @@ export function Flags() {
 	const mutation = useMutation({
 		mutationFn: (answer: { answer: Answer }) => {
 			return axios.patch(
-				"https://countries-backend.ahmed.systems/users/ahmed/flags",
+				"https://countries-backend.ahmed.systems/user/flags",
 				answer,
 			);
 		},
