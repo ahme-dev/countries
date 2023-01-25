@@ -1,5 +1,6 @@
 import { Flex, Heading, Text, useColorModeValue } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Auth } from "../components/Auth";
 
 export function Main() {
 	const { t } = useTranslation();
@@ -20,6 +21,7 @@ export function Main() {
 					"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.",
 				)}
 			</Text>
+			<Auth></Auth>
 		</Flex>
 	);
 }
