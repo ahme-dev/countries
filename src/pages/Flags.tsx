@@ -35,9 +35,10 @@ export function Flags() {
 	} = useQuery({
 		queryKey: ["getUser"],
 		queryFn: async () => {
-			let res = await fetch("https://countries-backend.ahmed.systems/user");
+			let res = await fetch("https://countries-backend.ahmed.systems/user", {
+				credentials: "include",
+			});
 			let data = await res.json();
-			console.log("user data", data);
 			return data as UserResponse;
 		},
 	});
@@ -47,6 +48,7 @@ export function Flags() {
 		mutationFn: (answer: { answer: Answer }) => {
 			return fetch("https://countries-backend.ahmed.systems/user/flags", {
 				method: "PATCH",
+				credentials: "include",
 				body: JSON.stringify(answer),
 			});
 		},

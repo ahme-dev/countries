@@ -1,4 +1,4 @@
-import { Button, Center, Input} from "@chakra-ui/react";
+import { Button, Center, Input } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { useRef } from "react";
 
