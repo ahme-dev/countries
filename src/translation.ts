@@ -36,6 +36,10 @@ const resources = {
 			Kurdish: "کوردی",
 			Eng: "ئنگ",
 			Kur: "کرد",
+
+			Login: "بچۆرە ناوەوە",
+			Username: "ناوی بەکارهێنەر",
+			Password: "وشەی نهێنی",
 		},
 	},
 };

@@ -1,5 +1,6 @@
 import { Button, Center, Input } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
+import { t } from "i18next";
 import { useRef } from "react";
 
 export function Auth() {
@@ -35,14 +36,20 @@ export function Auth() {
 
 	return (
 		<Center gap={2}>
-			<Input ref={usernameInput} placeholder="Username"></Input>
-			<Input ref={passwordInput} placeholder="Password"></Input>
+			<Input
+				ref={usernameInput}
+				placeholder={t("Username") || "Username"}
+			></Input>
+			<Input
+				ref={passwordInput}
+				placeholder={t("Password") || "Password"}
+			></Input>
 			<Button
 				onClick={() => mutation.mutate()}
 				isLoading={mutation.isLoading}
 				px={8}
 			>
-				Login
+				{t("Login")}
 			</Button>
 		</Center>
 	);
