@@ -1,7 +1,7 @@
-import { Button, Center, Spinner, Text, useToast } from "@chakra-ui/react";
+import { Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Play } from "../components/Play";
 import { Answer, FlagsResponse, UserResponse } from "../types";
 
