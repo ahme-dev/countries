@@ -1,9 +1,13 @@
-import { Button, Center, Input } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { Button, Center, Input, Text, useToast } from "@chakra-ui/react";
+import { MutationCache, useMutation } from "@tanstack/react-query";
 import { t } from "i18next";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+	const toast = useToast();
+	let navigate = useNavigate();
+
 	const usernameInput: any = useRef(null);
 	const passwordInput: any = useRef(null);
 
@@ -25,9 +29,27 @@ export function Login() {
 					}),
 				},
 			);
-			let data = await res.json();
-			console.log(data);
-			return data;
+
+			if (!res.ok) throw new Error(res.statusText);
+
+			return res;
+		},
+		onError: () => {
+			toast({
+				title: "Incorrect password/username",
+				status: "error",
+				duration: 3000,
+				variant: "solid",
+			});
+		},
+		onSuccess: () => {
+			toast({
+				title: "Successfully logged in",
+				status: "success",
+				duration: 3000,
+				variant: "solid",
+			});
+			setTimeout(() => navigate(0), 2000);
 		},
 	});
 
@@ -35,20 +57,23 @@ export function Login() {
 		<Center gap={2} flexDirection={"column"} alignItems={"flex-end"}>
 			<Input
 				ref={usernameInput}
-				isDisabled={mutation.isLoading}
+				isDisabled={mutation.isLoading || mutation.isSuccess}
 				placeholder={t("Username") || "Username"}
 				colorScheme={mutation.isError ? "red" : "blue"}
 			></Input>
 			<Input
-				isDisabled={mutation.isLoading}
+				isDisabled={mutation.isLoading || mutation.isSuccess}
 				ref={passwordInput}
+				type="password"
 				placeholder={t("Password") || "Password"}
 				colorScheme={mutation.isError ? "red" : "blue"}
 			></Input>
 			<Button
+				isLoading={mutation.isLoading || mutation.isSuccess}
 				onClick={() => mutation.mutate()}
-				colorScheme={mutation.isError ? "red" : "blue"}
-				isLoading={mutation.isLoading}
+				colorScheme={
+					mutation.isError ? "red" : mutation.isSuccess ? "green" : "blue"
+				}
 				px={8}
 			>
 				{t("Login")}

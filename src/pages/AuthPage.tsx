@@ -13,7 +13,6 @@ export function AuthPage() {
 				credentials: "include",
 			});
 			let data = await res.json();
-			console.log(data);
 			return data as UserResponse;
 		},
 	});
