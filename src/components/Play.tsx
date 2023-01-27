@@ -62,7 +62,7 @@ export function Play(props: {
 			{/* Flag end */}
 
 			{/* Body */}
-			<CardBody>
+			<CardBody w={"full"}>
 				<Flex direction={"column"} gap={4} justifyContent="space-evenly">
 					{/* Question Text */}
 					<Heading size={"md"}>
