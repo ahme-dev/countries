@@ -1,6 +1,5 @@
-import { Button, Center, Input } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { Button, Center, Input, Text } from "@chakra-ui/react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useRef } from "react";
 
 export function Auth() {
@@ -8,17 +7,52 @@ export function Auth() {
 	const passwordInput: any = useRef(null);
 
 	const mutation = useMutation({
-		mutationFn: () => {
-			console.log(usernameInput.current.value);
-			console.log(passwordInput.current.value);
-			return axios.post("https://countries-backend.ahmed.systems/login", {
-				username: usernameInput.current.value,
-				password: passwordInput.current.value,
-			});
+		mutationKey: ["login"],
+		mutationFn: async () => {
+			let res = await fetch(
+				"https://countries-backend.ahmed.systems/auth/login",
+				{
+					method: "POST", // *GET, POST, PUT, DELETE, etc.
+					mode: "cors", // no-cors, *cors, same-origin
+					credentials: "same-origin", // include, *same-origin, omit
+					headers: {
+						"Content-Type": "application/json",
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					body: JSON.stringify({
+						username: usernameInput.current.value,
+						password: passwordInput.current.value,
+					}),
+				},
+			);
+			let data = await res.json();
+			return data;
 		},
 	});
 
-	if (mutation.isSuccess) return <Center>You're in!</Center>;
+	const { isLoading: userIsLoading, data: userData } = useQuery({
+		queryKey: ["getUser", mutation.data],
+		retry: false,
+		queryFn: async () => {
+			let res = await fetch("https://countries-backend.ahmed.systems/user");
+			let data = await res.json();
+			console.log("user data", data);
+			return data;
+		},
+	});
+
+	if (userIsLoading) return <h1>User loading</h1>;
+
+	if (userData) return <h3>Logged in as {userData.username}</h3>;
+
+	if (mutation.isSuccess)
+		return (
+			<Center>
+				<Text>User</Text>
+				<Text>{userData}</Text>
+				You're in!
+			</Center>
+		);
 	if (mutation.isError) return <Center>Fail</Center>;
 
 	return (

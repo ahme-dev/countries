@@ -22,9 +22,10 @@ export function Flags() {
 	} = useQuery({
 		queryKey: ["getFlags"],
 		queryFn: async () => {
-			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
-			const resData = await res.json();
-			return resData as FlagsResponse;
+			const res = await axios.get(
+				`https://countries-backend.ahmed.systems/flags`,
+			);
+			return res.data as FlagsResponse;
 		},
 	});
 
