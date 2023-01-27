@@ -5,7 +5,9 @@
 
 A quiz PWA in React. Try to guess countries' capitals or guess a country by its flag.
 
-Built with Chakra UI and Zustand. Mobile friendly, and installable (currently always requires wifi to work).
+Built with Chakra UI and React Query. Mobile friendly, and installable (currently always requires wifi to work).
+
+The backend code is [here](https://github.com/ahmeddots/countries-backend).
 
 Use or install at [countries.ahmed.systems](https://countries.ahmed.systems) 👋
 
