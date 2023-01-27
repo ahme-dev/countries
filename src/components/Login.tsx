@@ -1,11 +1,9 @@
-import { Button, Center, Input, useToast } from "@chakra-ui/react";
+import { Button, Center, Input } from "@chakra-ui/react";
 import { useMutation } from "@tanstack/react-query";
 import { t } from "i18next";
 import { useRef } from "react";
 
 export function Login() {
-	const toast = useToast();
-
 	const usernameInput: any = useRef(null);
 	const passwordInput: any = useRef(null);
 
@@ -28,15 +26,8 @@ export function Login() {
 				},
 			);
 			let data = await res.json();
+			console.log(data);
 			return data;
-		},
-		onError: () => {
-			toast({
-				title: "Incorrect username and password",
-				status: "error",
-				duration: 3000,
-				variant: "solid",
-			});
 		},
 	});
 
