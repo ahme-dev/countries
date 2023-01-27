@@ -80,7 +80,7 @@ export function Play(props: {
 								// using index as key id not optimal
 								key={i}
 								borderColor={selected === i ? "purple.400" : "transparent"}
-								borderWidth={selected === i ? 2 : 0}
+								borderWidth={2}
 							>
 								{el}
 							</Button>
