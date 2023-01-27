@@ -1,6 +1,5 @@
 import { Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useTranslation } from "react-i18next";
 import { Play } from "../components/Play";
 import { Answer, FlagsResponse, UserResponse } from "../types";
@@ -22,34 +21,34 @@ export function Flags() {
 	} = useQuery({
 		queryKey: ["getFlags"],
 		queryFn: async () => {
-			const res = await axios.get(
-				`https://countries-backend.ahmed.systems/flags`,
-			);
-			return res.data as FlagsResponse;
+			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
+			let data = await res.json();
+			return data as FlagsResponse;
 		},
 	});
 
-	// fetch user data
 	const {
 		isLoading: userIsLoading,
-		data: userData,
 		error: userError,
+		data: userData,
 		refetch: userRefetch,
 	} = useQuery({
 		queryKey: ["getUser"],
 		queryFn: async () => {
-			let res = await axios.get("https://countries-backend.ahmed.systems/user");
-			return res.data as UserResponse;
+			let res = await fetch("https://countries-backend.ahmed.systems/user");
+			let data = await res.json();
+			console.log("user data", data);
+			return data as UserResponse;
 		},
 	});
 
 	// add result to users answers
 	const mutation = useMutation({
 		mutationFn: (answer: { answer: Answer }) => {
-			return axios.patch(
-				"https://countries-backend.ahmed.systems/user/flags",
-				answer,
-			);
+			return fetch("https://countries-backend.ahmed.systems/user/flags", {
+				method: "PATCH",
+				body: JSON.stringify(answer),
+			});
 		},
 		onSuccess: () => userRefetch(),
 		onError: () =>

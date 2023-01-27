@@ -1,5 +1,5 @@
-import { Button, Center, Input, Text } from "@chakra-ui/react";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { Button, Center, Input} from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
 import { useRef } from "react";
 
 export function Auth() {
@@ -30,29 +30,7 @@ export function Auth() {
 		},
 	});
 
-	const { isLoading: userIsLoading, data: userData } = useQuery({
-		queryKey: ["getUser", mutation.data],
-		retry: false,
-		queryFn: async () => {
-			let res = await fetch("https://countries-backend.ahmed.systems/user");
-			let data = await res.json();
-			console.log("user data", data);
-			return data;
-		},
-	});
-
-	if (userIsLoading) return <h1>User loading</h1>;
-
-	if (userData) return <h3>Logged in as {userData.username}</h3>;
-
-	if (mutation.isSuccess)
-		return (
-			<Center>
-				<Text>User</Text>
-				<Text>{userData}</Text>
-				You're in!
-			</Center>
-		);
+	if (mutation.isSuccess) return <Center>You're in!</Center>;
 	if (mutation.isError) return <Center>Fail</Center>;
 
 	return (
