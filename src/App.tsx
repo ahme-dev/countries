@@ -13,11 +13,19 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "../public/NizarART.woff";
 import "./App.css";
 import { AuthPage } from "./pages/AuthPage";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
 function App() {
 	const { i18n } = useTranslation();
+
+	useEffect(() => {
+		if (i18n.language !== "en" && i18n.language !== "ku") {
+			console.log("Unknown language", i18n.language, "setting to en");
+			i18n.changeLanguage("en");
+		}
+	}, []);
 
 	return (
 		<QueryClientProvider client={queryClient}>
