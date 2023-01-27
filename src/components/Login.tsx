@@ -54,7 +54,7 @@ export function Login() {
 	});
 
 	return (
-		<Center gap={2} flexDirection={"column"} alignItems={"flex-end"}>
+		<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
 			<Input
 				ref={usernameInput}
 				isDisabled={mutation.isLoading || mutation.isSuccess}
@@ -69,7 +69,6 @@ export function Login() {
 			<Button
 				isLoading={mutation.isLoading || mutation.isSuccess}
 				onClick={() => mutation.mutate()}
-				px={8}
 			>
 				{t("Login")}
 			</Button>

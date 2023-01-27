@@ -17,7 +17,7 @@ export function AuthPage() {
 		},
 	});
 
-	if (queryUser.isLoading) return <Spinner />;
+	if (queryUser.isLoading) return <Spinner size={"xl"} m={4}></Spinner>;
 
 	if (queryUser.data)
 		return (

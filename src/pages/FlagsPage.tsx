@@ -1,12 +1,14 @@
-import { Center, Spinner, Text, useToast } from "@chakra-ui/react";
+import { Button, Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
 import { Play } from "../components/Play";
 import { Answer, FlagsResponse, UserResponse } from "../types";
 
 // types
 
 export function FlagsPage() {
+	let navigate = useNavigate();
 	const toast = useToast();
 	const { i18n, t } = useTranslation();
 	const lang = i18n.language as "en" | "ku";
@@ -41,6 +43,7 @@ export function FlagsPage() {
 			let data = await res.json();
 			return data as UserResponse;
 		},
+		retry: false,
 	});
 
 	// add result to users answers
@@ -96,22 +99,8 @@ export function FlagsPage() {
 
 	// render
 
-	if (flagsAreLoading) {
-		return (
-			<Center flexDirection={"column"}>
-				<Spinner size={"xl"} m={4}></Spinner>
-				<Text>{t("Loading flags data...")}</Text>
-			</Center>
-		);
-	}
-
-	if (userIsLoading) {
-		return (
-			<Center flexDirection={"column"}>
-				<Spinner size={"xl"} m={4}></Spinner>
-				<Text>{t("Loading user data...")}</Text>
-			</Center>
-		);
+	if (flagsAreLoading || userIsLoading) {
+		return <Spinner size={"xl"} m={4}></Spinner>;
 	}
 
 	if (mutation.isLoading) {
@@ -122,6 +111,8 @@ export function FlagsPage() {
 			</Center>
 		);
 	}
+
+	if (userError || !userData) navigate("/auth");
 
 	if (flagsError || userError || !flagsData || !userData) {
 		return <Text>Couldn't load anything</Text>;
