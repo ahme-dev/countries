@@ -6,7 +6,7 @@ export function Main() {
 	const { t } = useTranslation();
 
 	return (
-		<Flex direction={"column"} maxW={"lg"} gap={4}>
+		<Flex direction={"column"} maxW={"lg"} gap={8}>
 			<Heading
 				bgGradient={useColorModeValue(
 					"linear(to-r, blue.700, purple.800)",
