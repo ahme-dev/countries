@@ -117,7 +117,7 @@ export function AuthPage() {
 
 	const userQuery = useQuery({
 		// rerun when data is fetched from mutations
-		queryKey: ["user", loginMutation.data, registerMutation.data],
+		queryKey: ["user", registerMutation.data, loginMutation.data],
 		retry: false,
 		refetchOnWindowFocus: false,
 		queryFn: async () => {
