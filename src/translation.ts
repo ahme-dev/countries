@@ -38,6 +38,7 @@ const resources = {
 			Kur: "کرد",
 
 			Login: "بچۆرە ناوەوە",
+			Register: "ئەکاونت دروستبکە",
 			Username: "ناوی بەکارهێنەر",
 			Password: "وشەی نهێنی",
 		},

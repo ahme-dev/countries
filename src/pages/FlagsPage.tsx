@@ -6,7 +6,7 @@ import { Answer, FlagsResponse, UserResponse } from "../types";
 
 // types
 
-export function Flags() {
+export function FlagsPage() {
 	const toast = useToast();
 	const { i18n, t } = useTranslation();
 	const lang = i18n.language as "en" | "ku";

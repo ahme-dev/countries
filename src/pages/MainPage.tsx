@@ -1,8 +1,15 @@
-import { Flex, Heading, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+	Button,
+	ButtonGroup,
+	Flex,
+	Heading,
+	Text,
+	useColorModeValue,
+} from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { Auth } from "../components/Auth";
+import { Link } from "react-router-dom";
 
-export function Main() {
+export function MainPage() {
 	const { t } = useTranslation();
 
 	return (
@@ -21,7 +28,15 @@ export function Main() {
 					"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.",
 				)}
 			</Text>
-			<Auth></Auth>
+
+			<ButtonGroup>
+				<Link to={"/auth"}>
+					<Button>{t("Login")}</Button>
+				</Link>
+				<Link to={"/auth"}>
+					<Button>{t("Register")}</Button>
+				</Link>
+			</ButtonGroup>
 		</Flex>
 	);
 }

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { t } from "i18next";
 import { useRef } from "react";
 
-export function Auth() {
+export function Login() {
 	const toast = useToast();
 
 	const usernameInput: any = useRef(null);
@@ -15,12 +15,11 @@ export function Auth() {
 			let res = await fetch(
 				"https://countries-backend.ahmed.systems/auth/login",
 				{
-					method: "POST", // *GET, POST, PUT, DELETE, etc.
-					mode: "cors", // no-cors, *cors, same-origin
-					credentials: "include", // include, *same-origin, omit
+					method: "POST",
+					mode: "cors",
+					credentials: "include",
 					headers: {
 						"Content-Type": "application/json",
-						// 'Content-Type': 'application/x-www-form-urlencoded',
 					},
 					body: JSON.stringify({
 						username: usernameInput.current.value,
@@ -41,10 +40,8 @@ export function Auth() {
 		},
 	});
 
-	if (mutation.isSuccess) return <Center>You're in!</Center>;
-
 	return (
-		<Center gap={2} flexDirection={{ base: "column", sm: "row" }}>
+		<Center gap={2} flexDirection={"column"} alignItems={"flex-end"}>
 			<Input
 				ref={usernameInput}
 				isDisabled={mutation.isLoading}
