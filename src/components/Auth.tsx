@@ -14,7 +14,7 @@ export function Auth() {
 				{
 					method: "POST", // *GET, POST, PUT, DELETE, etc.
 					mode: "cors", // no-cors, *cors, same-origin
-					credentials: "same-origin", // include, *same-origin, omit
+					credentials: "include", // include, *same-origin, omit
 					headers: {
 						"Content-Type": "application/json",
 						// 'Content-Type': 'application/x-www-form-urlencoded',
