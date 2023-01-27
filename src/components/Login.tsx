@@ -1,5 +1,5 @@
-import { Button, Center, Input, Text, useToast } from "@chakra-ui/react";
-import { MutationCache, useMutation } from "@tanstack/react-query";
+import { Button, Center, Input, useToast } from "@chakra-ui/react";
+import { useMutation } from "@tanstack/react-query";
 import { t } from "i18next";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ export function Login() {
 				duration: 3000,
 				variant: "solid",
 			});
-			setTimeout(() => navigate(0), 2000);
+			setTimeout(() => navigate(0), 1000);
 		},
 	});
 
@@ -59,21 +59,16 @@ export function Login() {
 				ref={usernameInput}
 				isDisabled={mutation.isLoading || mutation.isSuccess}
 				placeholder={t("Username") || "Username"}
-				colorScheme={mutation.isError ? "red" : "blue"}
 			></Input>
 			<Input
 				isDisabled={mutation.isLoading || mutation.isSuccess}
 				ref={passwordInput}
 				type="password"
 				placeholder={t("Password") || "Password"}
-				colorScheme={mutation.isError ? "red" : "blue"}
 			></Input>
 			<Button
 				isLoading={mutation.isLoading || mutation.isSuccess}
 				onClick={() => mutation.mutate()}
-				colorScheme={
-					mutation.isError ? "red" : mutation.isSuccess ? "green" : "blue"
-				}
 				px={8}
 			>
 				{t("Login")}
