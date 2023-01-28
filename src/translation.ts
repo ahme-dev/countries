@@ -41,6 +41,7 @@ const resources = {
 			Register: "ئەکاونت دروستبکە",
 			Username: "ناوی بەکارهێنەر",
 			Password: "وشەی نهێنی",
+			Authenticate: "خۆت بناسێنە"
 		},
 	},
 };

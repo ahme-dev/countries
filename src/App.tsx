@@ -1,19 +1,17 @@
-import { Center, Container, Flex } from "@chakra-ui/react";
-import { Route, Routes } from "react-router-dom";
 import { Info } from "./components/Info";
 import { Nav } from "./components/Nav";
-// import { Capitals } from "./pages/Capitals";
 import { FlagsPage } from "./pages/FlagsPage";
 import { MainPage } from "./pages/MainPage";
-import { useTranslation } from "react-i18next";
 
+import { Center, Container, Flex } from "@chakra-ui/react";
+import { Route, Routes } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // add font
 import "../public/NizarART.woff";
 import "./App.css";
-import { AuthPage } from "./pages/AuthPage";
-import { useEffect } from "react";
 
 const queryClient = new QueryClient();
 
@@ -50,8 +48,6 @@ function App() {
 						<Routes>
 							<Route path={"/"} element={<MainPage />} />
 							<Route path={"/flags"} element={<FlagsPage />} />
-							<Route path={"/auth"} element={<AuthPage />} />
-							{/* <Route path={"/capitals"} element={<Capitals></Capitals>} /> */}
 						</Routes>
 					</Center>
 					{/* Main End */}

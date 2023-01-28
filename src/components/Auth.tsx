@@ -6,6 +6,7 @@ import {
 	Spinner,
 	Text,
 	ButtonGroup,
+	useColorModeValue,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
@@ -13,7 +14,7 @@ import { useRef } from "react";
 import { UserResponse } from "../types";
 import { t } from "i18next";
 
-export function AuthPage() {
+export function Auth() {
 	const toast = useToast();
 
 	const usernameInput: any = useRef(null);
@@ -149,6 +150,16 @@ export function AuthPage() {
 
 	return (
 		<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
+			<Text
+				fontSize={"2xl"}
+				bgGradient={useColorModeValue(
+					"linear(to-r, blue.700, purple.800)",
+					"linear(to-r, blue.100, purple.200)",
+				)}
+				bgClip="text"
+			>
+				{t("Authenticate")}
+			</Text>
 			<Input
 				ref={usernameInput}
 				isDisabled={anyLoading}

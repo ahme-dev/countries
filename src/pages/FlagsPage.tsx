@@ -116,7 +116,7 @@ export function FlagsPage() {
 		);
 	}
 
-	if (userError || !userData) navigate("/auth");
+	if (userError || !userData) navigate("/");
 
 	if (flagsError || userError || !flagsData || !userData) {
 		return <Text>Couldn't load anything</Text>;
