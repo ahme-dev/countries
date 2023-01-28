@@ -60,36 +60,24 @@ function DesktopNav() {
 	const { t, i18n } = useTranslation();
 
 	return (
-		<>
-			{/* Nav (Desktop) */}
-			<Flex gap={4} display={{ base: "none", sm: "flex" }}>
-				{["Capitals", "Flags"].map((el, i) => (
-					<Link key={i} to={"/" + el.toLowerCase()}>
-						<Button fontWeight={"bold"}>{t(el)}</Button>
-					</Link>
-				))}
-			</Flex>
-
-			{/* Options (Desktop) */}
-			<Center gap={2} display={{ base: "none", sm: "flex" }}>
-				<Menu>
-					<MenuButton as={IconButton} icon={<ChatIcon />} />
-					<MenuList>
-						<MenuItem onClick={() => i18n.changeLanguage("en")}>
-							{t("English")}
-						</MenuItem>
-						<MenuItem onClick={() => i18n.changeLanguage("ku")}>
-							{t("Kurdish")}
-						</MenuItem>
-					</MenuList>
-				</Menu>
-				<IconButton
-					aria-label="Theme Switching Icon"
-					onClick={toggleColorMode}
-					icon={colorMode === "dark" ? <MoonIcon /> : <SunIcon />}
-				></IconButton>
-			</Center>
-		</>
+		<Center gap={2} display={{ base: "none", sm: "flex" }}>
+			<Menu>
+				<MenuButton as={IconButton} icon={<ChatIcon />} />
+				<MenuList>
+					<MenuItem onClick={() => i18n.changeLanguage("en")}>
+						{t("English")}
+					</MenuItem>
+					<MenuItem onClick={() => i18n.changeLanguage("ku")}>
+						{t("Kurdish")}
+					</MenuItem>
+				</MenuList>
+			</Menu>
+			<IconButton
+				aria-label="Theme Switching Icon"
+				onClick={toggleColorMode}
+				icon={colorMode === "dark" ? <MoonIcon /> : <SunIcon />}
+			></IconButton>
+		</Center>
 	);
 }
 

@@ -151,7 +151,7 @@ export function Auth() {
 	return (
 		<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
 			<Text
-				fontSize={"2xl"}
+				fontSize={"3xl"}
 				bgGradient={useColorModeValue(
 					"linear(to-r, blue.700, purple.800)",
 					"linear(to-r, blue.100, purple.200)",

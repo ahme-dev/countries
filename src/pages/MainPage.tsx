@@ -14,7 +14,7 @@ export function MainPage() {
 	const { t } = useTranslation();
 
 	return (
-		<Flex direction={{ base: "column", md: "row" }} gap={8}>
+		<Flex direction={{ base: "column", md: "row" }} gap={16}>
 			<Flex direction={"column"} maxW={"lg"} gap={4}>
 				<Heading
 					bgGradient={useColorModeValue(
@@ -28,6 +28,9 @@ export function MainPage() {
 				<Text>
 					{t(
 						"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.",
+					)}{" "}
+					{t(
+						"Your score here will be saved after registering and logging in with an account.",
 					)}
 				</Text>
 

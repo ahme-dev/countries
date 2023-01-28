@@ -26,6 +26,9 @@ const resources = {
 			"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.":
 				"دوو یاریمان هەیە، یەکێکیان بۆ زانینی پایتەختی وڵاتێک، دانەیەکیش بۆ زانینی ناوی وڵاتێک بە ئاڵاکەیا.",
 
+			"Your score here will be saved after registering and logging in with an account.":
+				"ئەنجامەکانت لێرە خەزنئەکرێن دوای دروستکردن و چوونەناوەوە بە ئەکاونتێک.",
+
 			Menu: "هەڵبژاردەکان",
 			Language: "زمان",
 			Theme: "ڕەنگ",
@@ -41,7 +44,7 @@ const resources = {
 			Register: "ئەکاونت دروستبکە",
 			Username: "ناوی بەکارهێنەر",
 			Password: "وشەی نهێنی",
-			Authenticate: "خۆت بناسێنە"
+			Authenticate: "خۆت بناسێنە",
 		},
 	},
 };
