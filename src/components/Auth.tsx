@@ -7,18 +7,35 @@ import {
 	Text,
 	ButtonGroup,
 	useColorModeValue,
+	Image,
+	Box,
+	Flex,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import { UserResponse } from "../types";
 import { t } from "i18next";
+
+import { createAvatar } from "@dicebear/core";
+import { croodlesNeutral } from "@dicebear/collection";
 
 export function Auth() {
 	const toast = useToast();
 
-	const usernameInput: any = useRef(null);
-	const passwordInput: any = useRef(null);
+	const [valUsername, setUsername] = useState<string>();
+	const [valPassword, setPassword] = useState<string>();
+	const [valImage, setImage] = useState<string>();
+
+	useEffect(() => {
+		const avatar = createAvatar(croodlesNeutral, {
+			seed: valUsername,
+		});
+
+		let uri = avatar.toDataUriSync();
+
+		setImage(uri);
+	}, [valUsername]);
 
 	// toasts
 
@@ -75,8 +92,8 @@ export function Auth() {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						username: usernameInput.current.value,
-						password: passwordInput.current.value,
+						username: valUsername,
+						password: valPassword,
 					}),
 				},
 			);
@@ -102,8 +119,8 @@ export function Auth() {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						username: usernameInput.current.value,
-						password: passwordInput.current.value,
+						username: valUsername,
+						password: valPassword,
 					}),
 				},
 			);
@@ -116,9 +133,35 @@ export function Auth() {
 		onSuccess: () => registerToasts.success(),
 	});
 
+	const logoutMutation = useMutation({
+		mutationKey: ["logout"],
+		mutationFn: async () => {
+			let res = await fetch(
+				"https://countries-backend.ahmed.systems/auth/logout",
+				{
+					method: "POST",
+					mode: "cors",
+					credentials: "include",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
+
+			if (!res.ok) throw new Error(res.statusText);
+
+			return res;
+		},
+	});
+
 	const userQuery = useQuery({
 		// rerun when data is fetched from mutations
-		queryKey: ["user", registerMutation.data, loginMutation.data],
+		queryKey: [
+			"user",
+			registerMutation.data,
+			loginMutation.data,
+			logoutMutation.isSuccess,
+		],
 		retry: false,
 		refetchOnWindowFocus: false,
 		queryFn: async () => {
@@ -143,45 +186,73 @@ export function Auth() {
 	if (userQuery.data)
 		return (
 			<Center flexDirection={"column"} gap={4}>
+				<Image
+					bgGradient={useColorModeValue(
+						"linear(to-r, blue.700, purple.800)",
+						"linear(to-r, blue.100, purple.200)",
+					)}
+					p="2"
+					w={"16"}
+					borderRadius={"full"}
+					src={valImage}
+				></Image>
 				<Text>Logged in as {userQuery.data.username}</Text>
-				<Button colorScheme={"red"}>Logout</Button>
+				<Button
+					isLoading={logoutMutation.isLoading || logoutMutation.isSuccess}
+					onClick={() => logoutMutation.mutate()}
+				>
+					{t("Logout")}
+				</Button>
 			</Center>
 		);
 
 	return (
 		<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
-			<Text
-				fontSize={"3xl"}
-				bgGradient={useColorModeValue(
-					"linear(to-r, blue.700, purple.800)",
-					"linear(to-r, blue.100, purple.200)",
-				)}
-				bgClip="text"
-			>
-				{t("Authenticate")}
-			</Text>
+			<Flex w={"full"} alignItems="flex-end" justifyContent={"space-between"}>
+				<Text
+					fontSize={"3xl"}
+					bgGradient={useColorModeValue(
+						"linear(to-r, blue.700, purple.800)",
+						"linear(to-r, blue.100, purple.200)",
+					)}
+					bgClip="text"
+				>
+					{t("Authenticate")}
+				</Text>
+				<Image
+					bgGradient={useColorModeValue(
+						"linear(to-r, blue.700, purple.800)",
+						"linear(to-r, blue.100, purple.200)",
+					)}
+					p="2"
+					w={"16"}
+					borderRadius={"full"}
+					src={valImage}
+				></Image>
+			</Flex>
+
 			<Input
-				ref={usernameInput}
+				onChange={(e) => setUsername(e.target.value)}
 				isDisabled={anyLoading}
 				placeholder={t("Username") || "Username"}
 			></Input>
 			<Input
-				ref={passwordInput}
+				onChange={(e) => setPassword(e.target.value)}
 				isDisabled={anyLoading}
-				type="password"
 				placeholder={t("Password") || "Password"}
+				type="password"
 			></Input>
 
 			<ButtonGroup>
 				<Button
-					isLoading={loginMutation.isLoading || loginMutation.isSuccess}
+					isLoading={loginMutation.isLoading}
 					isDisabled={anyLoading}
 					onClick={() => loginMutation.mutate()}
 				>
 					{t("Login")}
 				</Button>
 				<Button
-					isLoading={registerMutation.isLoading || registerMutation.isSuccess}
+					isLoading={registerMutation.isLoading}
 					isDisabled={anyLoading}
 					onClick={() => registerMutation.mutate()}
 				>
