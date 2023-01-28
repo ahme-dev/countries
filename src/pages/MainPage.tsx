@@ -1,6 +1,7 @@
 import {
 	Button,
 	ButtonGroup,
+	Center,
 	Flex,
 	Heading,
 	Text,
@@ -14,8 +15,13 @@ export function MainPage() {
 	const { t } = useTranslation();
 
 	return (
-		<Flex direction={{ base: "column", md: "row" }} gap={16}>
-			<Flex direction={"column"} maxW={"lg"} gap={4}>
+		<Center flexDirection={{ base: "column", md: "row" }} gap={16}>
+			<Center
+				flexDirection={"column"}
+				alignItems="flex-start"
+				maxW={"lg"}
+				gap={4}
+			>
 				<Heading
 					bgGradient={useColorModeValue(
 						"linear(to-r, blue.700, purple.800)",
@@ -39,8 +45,8 @@ export function MainPage() {
 						<Button>{t("Flags")}</Button>
 					</Link>
 				</ButtonGroup>
-			</Flex>
+			</Center>
 			<Auth></Auth>
-		</Flex>
+		</Center>
 	);
 }
