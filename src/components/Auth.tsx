@@ -8,7 +8,6 @@ import {
 	ButtonGroup,
 	useColorModeValue,
 	Image,
-	Box,
 	Flex,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
