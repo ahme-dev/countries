@@ -159,12 +159,6 @@ export function Auth() {
 		},
 	});
 
-	let anyLoading =
-		loginMutation.isLoading ||
-		loginMutation.isSuccess ||
-		registerMutation.isLoading ||
-		registerMutation.isSuccess;
-
 	// render
 
 	if (userQuery.isLoading) return <Spinner size={"xl"} m={4}></Spinner>;
@@ -194,7 +188,7 @@ export function Auth() {
 						</Center>
 					</Center>
 					<Button
-						isLoading={logoutMutation.isLoading || logoutMutation.isSuccess}
+						isLoading={logoutMutation.isLoading}
 						onClick={() => logoutMutation.mutate()}
 					>
 						{t("Logout")}
@@ -212,7 +206,6 @@ export function Auth() {
 			)}
 			direction={{ base: "column", sm: "row" }}
 			alignItems="center"
-			// overflow="hidden"
 			p={4}
 		>
 			<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
@@ -237,12 +230,12 @@ export function Auth() {
 
 				<Input
 					onChange={(e) => setUsername(e.target.value)}
-					isDisabled={anyLoading}
+					isDisabled={loginMutation.isLoading || registerMutation.isLoading}
 					placeholder={t("Username") || "Username"}
 				></Input>
 				<Input
 					onChange={(e) => setPassword(e.target.value)}
-					isDisabled={anyLoading}
+					isDisabled={loginMutation.isLoading || registerMutation.isLoading}
 					placeholder={t("Password") || "Password"}
 					type="password"
 				></Input>
@@ -250,14 +243,14 @@ export function Auth() {
 				<ButtonGroup>
 					<Button
 						isLoading={loginMutation.isLoading}
-						isDisabled={anyLoading}
+						isDisabled={loginMutation.isLoading || registerMutation.isLoading}
 						onClick={() => loginMutation.mutate()}
 					>
 						{t("Login")}
 					</Button>
 					<Button
 						isLoading={registerMutation.isLoading}
-						isDisabled={anyLoading}
+						isDisabled={loginMutation.isLoading || registerMutation.isLoading}
 						onClick={() => registerMutation.mutate()}
 					>
 						{t("Register")}
