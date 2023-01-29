@@ -37,9 +37,12 @@ export function FlagsPage() {
 	} = useQuery({
 		queryKey: ["getUser"],
 		queryFn: async () => {
-			let res = await fetch("https://countries-backend.ahmed.systems/user", {
-				credentials: "include",
-			});
+			let res = await fetch(
+				"https://countries-backend.ahmed.systems/users/me",
+				{
+					credentials: "include",
+				},
+			);
 			let data = await res.json();
 			return data as UserResponse;
 		},
