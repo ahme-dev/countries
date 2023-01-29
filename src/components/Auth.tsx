@@ -7,35 +7,21 @@ import {
 	Text,
 	ButtonGroup,
 	useColorModeValue,
-	Image,
 	Flex,
 	Card,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { UserResponse } from "../types";
 import { t } from "i18next";
-
-import { createAvatar } from "@dicebear/core";
-import { croodlesNeutral } from "@dicebear/collection";
+import { UserPicture } from "./UserPicture";
 
 export function Auth() {
 	const toast = useToast();
 
 	const [valUsername, setUsername] = useState<string>();
 	const [valPassword, setPassword] = useState<string>();
-	const [valImage, setImage] = useState<string>();
-
-	useEffect(() => {
-		const avatar = createAvatar(croodlesNeutral, {
-			seed: valUsername,
-		});
-
-		let uri = avatar.toDataUriSync();
-
-		setImage(uri);
-	}, [valUsername]);
 
 	// toasts
 
@@ -198,16 +184,7 @@ export function Auth() {
 			>
 				<Center flexDirection={"column"} gap={4} alignItems="flex-start">
 					<Center flexDirection={"row"} gap={4}>
-						<Image
-							bgGradient={useColorModeValue(
-								"linear(to-r, blue.700, purple.800)",
-								"linear(to-r, blue.100, purple.200)",
-							)}
-							p="2"
-							w={"16"}
-							borderRadius={"full"}
-							src={valImage}
-						/>
+						<UserPicture username={valUsername || ""}></UserPicture>
 
 						<Center flexDir={"column"} alignItems={"flex-start"}>
 							<Text>{t("Logged in as")}</Text>
@@ -255,17 +232,7 @@ export function Auth() {
 					>
 						{t("Authenticate")}
 					</Text>
-					<Image
-						position={"relative"}
-						bgGradient={useColorModeValue(
-							"linear(to-r, blue.700, purple.800)",
-							"linear(to-r, blue.100, purple.200)",
-						)}
-						p="2"
-						w={"16"}
-						borderRadius={"full"}
-						src={valImage}
-					></Image>
+					<UserPicture username={valUsername || ""}></UserPicture>
 				</Flex>
 
 				<Input
