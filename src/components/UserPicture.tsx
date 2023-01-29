@@ -19,10 +19,9 @@ export function UserPicture(props: { username: string }) {
 	return (
 		<Image
 			bgGradient={useColorModeValue(
-				"linear(to-r, blue.700, purple.800)",
+				"linear(to-r, blue.300, purple.400)",
 				"linear(to-r, blue.100, purple.200)",
 			)}
-			textColor={useColorModeValue("black", "white")}
 			p="2"
 			w={"16"}
 			borderRadius={"full"}
