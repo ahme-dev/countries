@@ -9,6 +9,7 @@ import {
 	useColorModeValue,
 	Image,
 	Flex,
+	Card,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
@@ -184,80 +185,118 @@ export function Auth() {
 
 	if (userQuery.data)
 		return (
-			<Center flexDirection={"column"} gap={4}>
-				<Image
-					bgGradient={useColorModeValue(
-						"linear(to-r, blue.700, purple.800)",
-						"linear(to-r, blue.100, purple.200)",
-					)}
-					p="2"
-					w={"16"}
-					borderRadius={"full"}
-					src={valImage}
-				></Image>
-				<Text>Logged in as {userQuery.data.username}</Text>
-				<Button
-					isLoading={logoutMutation.isLoading || logoutMutation.isSuccess}
-					onClick={() => logoutMutation.mutate()}
-				>
-					{t("Logout")}
-				</Button>
-			</Center>
+			<Card
+				rounded={"xl"}
+				bgGradient={useColorModeValue(
+					"linear(to-r, blue.100, purple.200)",
+					"linear(to-r, blue.700, purple.800)",
+				)}
+				direction={{ base: "column", sm: "row" }}
+				alignItems="center"
+				// overflow="hidden"
+				p={4}
+			>
+				<Center flexDirection={"column"} gap={4} alignItems="flex-start">
+					<Center flexDirection={"row"} gap={4}>
+						<Image
+							bgGradient={useColorModeValue(
+								"linear(to-r, blue.700, purple.800)",
+								"linear(to-r, blue.100, purple.200)",
+							)}
+							p="2"
+							w={"16"}
+							borderRadius={"full"}
+							src={valImage}
+						/>
+
+						<Center flexDir={"column"} alignItems={"flex-start"}>
+							<Text>{t("Logged in as")}</Text>
+							<Text fontSize={"2xl"} fontWeight={"bold"}>
+								{userQuery.data.username}
+							</Text>
+						</Center>
+					</Center>
+					<Button
+						isLoading={logoutMutation.isLoading || logoutMutation.isSuccess}
+						onClick={() => logoutMutation.mutate()}
+					>
+						{t("Logout")}
+					</Button>
+				</Center>
+			</Card>
 		);
 
 	return (
-		<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
-			<Flex w={"full"} alignItems="flex-end" justifyContent={"space-between"}>
-				<Text
-					fontSize={"3xl"}
-					bgGradient={useColorModeValue(
-						"linear(to-r, blue.700, purple.800)",
-						"linear(to-r, blue.100, purple.200)",
-					)}
-					bgClip="text"
+		<Card
+			rounded={"xl"}
+			bgGradient={useColorModeValue(
+				"linear(to-r, blue.100, purple.200)",
+				"linear(to-r, blue.700, purple.800)",
+			)}
+			direction={{ base: "column", sm: "row" }}
+			alignItems="center"
+			// overflow="hidden"
+			p={4}
+		>
+			<Center gap={2} flexDirection={"column"} alignItems={"flex-start"}>
+				<Flex
+					w={"full"}
+					alignItems="flex-end"
+					justifyContent={"space-between"}
+					gap={8}
 				>
-					{t("Authenticate")}
-				</Text>
-				<Image
-					bgGradient={useColorModeValue(
-						"linear(to-r, blue.700, purple.800)",
-						"linear(to-r, blue.100, purple.200)",
-					)}
-					p="2"
-					w={"16"}
-					borderRadius={"full"}
-					src={valImage}
-				></Image>
-			</Flex>
+					<Text
+						fontSize={"3xl"}
+						bgGradient={useColorModeValue(
+							"linear(to-r, blue.700, purple.800)",
+							"linear(to-r, blue.100, purple.200)",
+						)}
+						bgClip="text"
+					>
+						{t("Authenticate")}
+					</Text>
+					<Image
+						position={"relative"}
+						bgGradient={useColorModeValue(
+							"linear(to-r, blue.700, purple.800)",
+							"linear(to-r, blue.100, purple.200)",
+						)}
+						p="2"
+						w={"16"}
+						borderRadius={"full"}
+						src={valImage}
+					></Image>
+				</Flex>
 
-			<Input
-				onChange={(e) => setUsername(e.target.value)}
-				isDisabled={anyLoading}
-				placeholder={t("Username") || "Username"}
-			></Input>
-			<Input
-				onChange={(e) => setPassword(e.target.value)}
-				isDisabled={anyLoading}
-				placeholder={t("Password") || "Password"}
-				type="password"
-			></Input>
+				<Input
+					onChange={(e) => setUsername(e.target.value)}
+					isDisabled={anyLoading}
+					placeholder={t("Username") || "Username"}
+				></Input>
+				<Input
+					onChange={(e) => setPassword(e.target.value)}
+					isDisabled={anyLoading}
+					placeholder={t("Password") || "Password"}
+					type="password"
+				></Input>
 
-			<ButtonGroup>
-				<Button
-					isLoading={loginMutation.isLoading}
-					isDisabled={anyLoading}
-					onClick={() => loginMutation.mutate()}
-				>
-					{t("Login")}
-				</Button>
-				<Button
-					isLoading={registerMutation.isLoading}
-					isDisabled={anyLoading}
-					onClick={() => registerMutation.mutate()}
-				>
-					{t("Register")}
-				</Button>
-			</ButtonGroup>
-		</Center>
+				<ButtonGroup>
+					<Button
+						isLoading={loginMutation.isLoading}
+						isDisabled={anyLoading}
+						onClick={() => loginMutation.mutate()}
+					>
+						{t("Login")}
+					</Button>
+					<Button
+						isLoading={registerMutation.isLoading}
+						isDisabled={anyLoading}
+						onClick={() => registerMutation.mutate()}
+					>
+						{t("Register")}
+					</Button>
+				</ButtonGroup>
+			</Center>
+		</Card>
 	);
 }

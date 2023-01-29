@@ -40,6 +40,8 @@ const resources = {
 			Eng: "ئنگ",
 			Kur: "کرد",
 
+			"Logged in as": "داخڵبووی بە ناوی",
+			Logout: "بچۆرە دەرەوە",
 			Login: "بچۆرە ناوەوە",
 			Register: "ئەکاونت دروستبکە",
 			Username: "ناوی بەکارهێنەر",
