@@ -51,16 +51,23 @@ export function FlagsPage() {
 
 	// add result to users answers
 	const mutation = useMutation({
-		mutationFn: (answer: { answer: Answer }) => {
+		mutationFn: async (answer: { answer: Answer }) => {
 			let jsonAnswer = JSON.stringify(answer);
-			return fetch("https://countries-backend.ahmed.systems/users/me/flags", {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
+			let res = await fetch(
+				"https://countries-backend.ahmed.systems/users/me/flags",
+				{
+					method: "PATCH",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					credentials: "include",
+					body: jsonAnswer,
 				},
-				credentials: "include",
-				body: jsonAnswer,
-			});
+			);
+
+			if (!res.ok) throw new Error(res.statusText);
+
+			return res;
 		},
 		onSuccess: () => userRefetch(),
 		onError: () =>
