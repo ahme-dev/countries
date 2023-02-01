@@ -28,7 +28,7 @@ export function Auth() {
 	let loginToasts = {
 		fail: () => {
 			toast({
-				title: "Failed to login",
+				title: t("Failed to login"),
 				status: "error",
 				duration: 3000,
 				variant: "solid",
@@ -36,7 +36,7 @@ export function Auth() {
 		},
 		success: () => {
 			toast({
-				title: "Successfully logged in",
+				title: t("Successfully logged in"),
 				status: "success",
 				duration: 3000,
 				variant: "solid",
@@ -47,7 +47,7 @@ export function Auth() {
 	let registerToasts = {
 		success: () => {
 			toast({
-				title: "Successfully registered",
+				title: t("Successfully registered"),
 				status: "success",
 				duration: 3000,
 				variant: "solid",
@@ -55,7 +55,7 @@ export function Auth() {
 		},
 		fail: () => {
 			toast({
-				title: "Register failed",
+				title: t("Register failed"),
 				status: "error",
 				duration: 3000,
 				variant: "solid",

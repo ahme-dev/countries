@@ -72,7 +72,7 @@ export function FlagsPage() {
 		onSuccess: () => userRefetch(),
 		onError: () =>
 			toast({
-				title: "Failed to push answers",
+				title: t("Failed to push answers"),
 				status: "error",
 				duration: 3000,
 				variant: "solid",

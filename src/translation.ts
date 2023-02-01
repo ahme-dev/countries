@@ -21,6 +21,12 @@ const resources = {
 			"Loading user data...": "وا زانیاری بەکارهێنەر ڕائەکێشرێ...",
 			"Loading flags data...": "وا زانیاری ئاڵاکان ڕائەکێشرێ...",
 			"Saving answer...": "وا وەڵامەکە خەزنئەکرێت...",
+			"Failed to push answers": "وەڵامەکەت خەزننەکرا",
+
+			"Failed to login": "ناتوانیت بچیتە ناو ئەم ئەکاونتەوە",
+			"Successfully logged in": "سەرکەوتوو بوویت لە چوونە ناوەوە",
+			"Successfully registered": "سەرکەوتوو بوویت لە دروستکردنی ئەکاونتەکە",
+			"Register failed": "ناتوانیت ئەم ئەکاونتە دروست بکەیت",
 
 			"Welcome to the Countries app": "بەخێربێیت بۆ ئاپی وڵاتان",
 			"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.":
