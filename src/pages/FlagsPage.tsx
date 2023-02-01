@@ -24,7 +24,11 @@ export function FlagsPage() {
 		queryKey: ["getFlags"],
 		queryFn: async () => {
 			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
-			console.log(res.body);
+
+			if (!res.ok) {
+				console.log(await res.json());
+			}
+
 			let data = await res.json();
 			return data as FlagsResponse;
 		},
@@ -45,7 +49,9 @@ export function FlagsPage() {
 				},
 			);
 
-			console.log(res.body);
+			if (!res.ok) {
+				console.log(await res.json());
+			}
 
 			let data = await res.json();
 			return data as UserResponse;
@@ -69,9 +75,10 @@ export function FlagsPage() {
 				},
 			);
 
-			console.log(res.body);
-
-			if (!res.ok) throw new Error(res.statusText);
+			if (!res.ok) {
+				console.log(await res.json());
+				throw new Error(res.statusText);
+			}
 
 			return res;
 		},

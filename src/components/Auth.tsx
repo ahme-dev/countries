@@ -84,9 +84,10 @@ export function Auth() {
 				},
 			);
 
-			console.log(res.body);
-
-			if (!res.ok) throw new Error(res.statusText);
+			if (!res.ok) {
+				console.log(await res.json());
+				throw new Error(res.statusText);
+			}
 
 			return res;
 		},
@@ -113,9 +114,10 @@ export function Auth() {
 				},
 			);
 
-			console.log(res.body);
-
-			if (!res.ok) throw new Error(res.statusText);
+			if (!res.ok) {
+				console.log(await res.json());
+				throw new Error(res.statusText);
+			}
 
 			return res;
 		},
@@ -138,9 +140,10 @@ export function Auth() {
 				},
 			);
 
-			console.log(res.body);
-
-			if (!res.ok) throw new Error(res.statusText);
+			if (!res.ok) {
+				console.log(await res.json());
+				throw new Error(res.statusText);
+			}
 
 			return res;
 		},
@@ -164,7 +167,9 @@ export function Auth() {
 				},
 			);
 
-			console.log(res.body);
+			if (!res.ok) {
+				console.log(await res.json());
+			}
 
 			let data = await res.json();
 			return data as UserResponse;
