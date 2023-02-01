@@ -53,7 +53,7 @@ export function FlagsPage() {
 	const mutation = useMutation({
 		mutationFn: (answer: { answer: Answer }) => {
 			let jsonAnswer = JSON.stringify(answer);
-			return fetch("https://countries-backend.ahmed.systems/user/flags", {
+			return fetch("https://countries-backend.ahmed.systems/users/me/flags", {
 				method: "PATCH",
 				headers: {
 					"Content-Type": "application/json",
