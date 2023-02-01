@@ -24,6 +24,7 @@ export function FlagsPage() {
 		queryKey: ["getFlags"],
 		queryFn: async () => {
 			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
+			console.log(res.body);
 			let data = await res.json();
 			return data as FlagsResponse;
 		},
@@ -43,6 +44,9 @@ export function FlagsPage() {
 					credentials: "include",
 				},
 			);
+
+			console.log(res.body);
+
 			let data = await res.json();
 			return data as UserResponse;
 		},
@@ -64,6 +68,8 @@ export function FlagsPage() {
 					body: jsonAnswer,
 				},
 			);
+
+			console.log(res.body);
 
 			if (!res.ok) throw new Error(res.statusText);
 
