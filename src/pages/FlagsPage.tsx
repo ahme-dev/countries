@@ -1,7 +1,7 @@
 import { Button, Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Play } from "../components/Play";
 import { doAddAnswer, fetchFlags, fetchUser } from "../fetches";
 import { Answer } from "../types";
@@ -9,7 +9,6 @@ import { Answer } from "../types";
 // types
 
 export function FlagsPage() {
-	let navigate = useNavigate();
 	const toast = useToast();
 	const { i18n, t } = useTranslation();
 	const lang = i18n.language as "en" | "ku";
