@@ -13,7 +13,7 @@ export function FlagsPage() {
 	const { i18n, t } = useTranslation();
 	const lang = i18n.language as "en" | "ku";
 
-	// fetch
+	// queries and mutations
 
 	// fetch flags data
 	const {
@@ -25,6 +25,7 @@ export function FlagsPage() {
 		queryFn: () => fetchFlags(),
 	});
 
+	// fetch user data
 	const {
 		isLoading: userIsLoading,
 		error: userError,
@@ -49,7 +50,7 @@ export function FlagsPage() {
 			}),
 	});
 
-	// handle
+	// handlers
 
 	const handleAnswer = (selected: number) => {
 		if (!flagsData || !userData) return;
