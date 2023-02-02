@@ -17,6 +17,84 @@ import { UserResponse } from "../types";
 import { t } from "i18next";
 import { UserPicture } from "./UserPicture";
 
+const doLogin = async (username: string, password: string) => {
+	let res = await fetch("https://countries-backend.ahmed.systems/auth/login", {
+		method: "POST",
+		mode: "cors",
+		credentials: "include",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			username: username,
+			password: password,
+		}),
+	});
+
+	if (!res.ok) {
+		console.log(await res.json());
+		throw new Error(res.statusText);
+	}
+
+	return res;
+};
+
+const doRegister = async (username: string, password: string) => {
+	let res = await fetch(
+		"https://countries-backend.ahmed.systems/auth/register",
+		{
+			method: "POST",
+			mode: "cors",
+			credentials: "include",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				username: username,
+				password: password,
+			}),
+		},
+	);
+
+	if (!res.ok) {
+		console.log(await res.json());
+		throw new Error(res.statusText);
+	}
+
+	return res;
+};
+
+const doLogout = async () => {
+	let res = await fetch("https://countries-backend.ahmed.systems/auth/logout", {
+		method: "POST",
+		mode: "cors",
+		credentials: "include",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+	if (!res.ok) {
+		console.log(await res.json());
+		throw new Error(res.statusText);
+	}
+
+	return res;
+};
+
+const fetchUser = async () => {
+	let res = await fetch("https://countries-backend.ahmed.systems/users/me", {
+		credentials: "include",
+	});
+
+	if (!res.ok) {
+		console.log(await res.json());
+	}
+
+	let data = await res.json();
+	return data as UserResponse;
+};
+
 export function Auth() {
 	const toast = useToast();
 
@@ -67,86 +145,21 @@ export function Auth() {
 
 	const loginMutation = useMutation({
 		mutationKey: ["login"],
-		mutationFn: async () => {
-			let res = await fetch(
-				"https://countries-backend.ahmed.systems/auth/login",
-				{
-					method: "POST",
-					mode: "cors",
-					credentials: "include",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						username: valUsername,
-						password: valPassword,
-					}),
-				},
-			);
-
-			if (!res.ok) {
-				console.log(await res.json());
-				throw new Error(res.statusText);
-			}
-
-			return res;
-		},
+		mutationFn: () => doLogin(valUsername || "", valPassword || ""),
 		onError: () => loginToasts.fail(),
 		onSuccess: () => loginToasts.success(),
 	});
 
 	const registerMutation = useMutation({
 		mutationKey: ["register"],
-		mutationFn: async () => {
-			let res = await fetch(
-				"https://countries-backend.ahmed.systems/auth/register",
-				{
-					method: "POST",
-					mode: "cors",
-					credentials: "include",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						username: valUsername,
-						password: valPassword,
-					}),
-				},
-			);
-
-			if (!res.ok) {
-				console.log(await res.json());
-				throw new Error(res.statusText);
-			}
-
-			return res;
-		},
+		mutationFn: () => doRegister(valUsername || "", valPassword || ""),
 		onError: () => registerToasts.fail(),
 		onSuccess: () => registerToasts.success(),
 	});
 
 	const logoutMutation = useMutation({
 		mutationKey: ["logout"],
-		mutationFn: async () => {
-			let res = await fetch(
-				"https://countries-backend.ahmed.systems/auth/logout",
-				{
-					method: "POST",
-					mode: "cors",
-					credentials: "include",
-					headers: {
-						"Content-Type": "application/json",
-					},
-				},
-			);
-
-			if (!res.ok) {
-				console.log(await res.json());
-				throw new Error(res.statusText);
-			}
-
-			return res;
-		},
+		mutationFn: () => doLogout(),
 	});
 
 	const userQuery = useQuery({
@@ -159,21 +172,7 @@ export function Auth() {
 		],
 		retry: false,
 		refetchOnWindowFocus: false,
-		queryFn: async () => {
-			let res = await fetch(
-				"https://countries-backend.ahmed.systems/users/me",
-				{
-					credentials: "include",
-				},
-			);
-
-			if (!res.ok) {
-				console.log(await res.json());
-			}
-
-			let data = await res.json();
-			return data as UserResponse;
-		},
+		queryFn: () => fetchUser(),
 	});
 
 	// render
