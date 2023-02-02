@@ -27,6 +27,8 @@ const resources = {
 			"Successfully logged in": "سەرکەوتوو بوویت لە چوونە ناوەوە",
 			"Successfully registered": "سەرکەوتوو بوویت لە دروستکردنی ئەکاونتەکە",
 			"Register failed": "ناتوانیت ئەم ئەکاونتە دروست بکەیت",
+			"You're not logged in": "تۆ بە ئەکاونتێک داخڵ نەبوویت",
+			"Go back": "بگەڕێوە دواوە",
 
 			"Welcome to the Countries app": "بەخێربێیت بۆ ئاپی وڵاتان",
 			"We got 2 quiz games, one for guessing the capital of a country, and one for guessing the name of a country by a flag.":

@@ -13,87 +13,9 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { UserResponse } from "../types";
 import { t } from "i18next";
 import { UserPicture } from "./UserPicture";
-
-const doLogin = async (username: string, password: string) => {
-	let res = await fetch("https://countries-backend.ahmed.systems/auth/login", {
-		method: "POST",
-		mode: "cors",
-		credentials: "include",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			username: username,
-			password: password,
-		}),
-	});
-
-	if (!res.ok) {
-		console.log(await res.json());
-		throw new Error(res.statusText);
-	}
-
-	return res;
-};
-
-const doRegister = async (username: string, password: string) => {
-	let res = await fetch(
-		"https://countries-backend.ahmed.systems/auth/register",
-		{
-			method: "POST",
-			mode: "cors",
-			credentials: "include",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				username: username,
-				password: password,
-			}),
-		},
-	);
-
-	if (!res.ok) {
-		console.log(await res.json());
-		throw new Error(res.statusText);
-	}
-
-	return res;
-};
-
-const doLogout = async () => {
-	let res = await fetch("https://countries-backend.ahmed.systems/auth/logout", {
-		method: "POST",
-		mode: "cors",
-		credentials: "include",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	});
-
-	if (!res.ok) {
-		console.log(await res.json());
-		throw new Error(res.statusText);
-	}
-
-	return res;
-};
-
-const fetchUser = async () => {
-	let res = await fetch("https://countries-backend.ahmed.systems/users/me", {
-		credentials: "include",
-	});
-
-	if (!res.ok) {
-		console.log(await res.json());
-	}
-
-	let data = await res.json();
-	return data as UserResponse;
-};
+import { doLogin, doLogout, doRegister, fetchUser } from "../fetches";
 
 export function Auth() {
 	const toast = useToast();
@@ -109,7 +31,6 @@ export function Auth() {
 				title: t("Failed to login"),
 				status: "error",
 				duration: 3000,
-				variant: "solid",
 			});
 		},
 		success: () => {
@@ -117,7 +38,6 @@ export function Auth() {
 				title: t("Successfully logged in"),
 				status: "success",
 				duration: 3000,
-				variant: "solid",
 			});
 		},
 	};
@@ -128,7 +48,6 @@ export function Auth() {
 				title: t("Successfully registered"),
 				status: "success",
 				duration: 3000,
-				variant: "solid",
 			});
 		},
 		fail: () => {
@@ -136,7 +55,6 @@ export function Auth() {
 				title: t("Register failed"),
 				status: "error",
 				duration: 3000,
-				variant: "solid",
 			});
 		},
 	};

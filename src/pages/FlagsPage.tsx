@@ -1,9 +1,10 @@
-import { Center, Spinner, Text, useToast } from "@chakra-ui/react";
+import { Button, Center, Spinner, Text, useToast } from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Play } from "../components/Play";
-import { Answer, FlagsResponse, UserResponse } from "../types";
+import { doAddAnswer, fetchFlags, fetchUser } from "../fetches";
+import { Answer } from "../types";
 
 // types
 
@@ -22,16 +23,7 @@ export function FlagsPage() {
 		error: flagsError,
 	} = useQuery({
 		queryKey: ["getFlags"],
-		queryFn: async () => {
-			const res = await fetch(`https://countries-backend.ahmed.systems/flags`);
-
-			if (!res.ok) {
-				console.log(await res.json());
-			}
-
-			let data = await res.json();
-			return data as FlagsResponse;
-		},
+		queryFn: () => fetchFlags(),
 	});
 
 	const {
@@ -41,47 +33,13 @@ export function FlagsPage() {
 		refetch: userRefetch,
 	} = useQuery({
 		queryKey: ["getUser"],
-		queryFn: async () => {
-			let res = await fetch(
-				"https://countries-backend.ahmed.systems/users/me",
-				{
-					credentials: "include",
-				},
-			);
-
-			if (!res.ok) {
-				console.log(await res.json());
-			}
-
-			let data = await res.json();
-			return data as UserResponse;
-		},
+		queryFn: () => fetchUser(),
 		retry: false,
 	});
 
 	// add result to users answers
 	const mutation = useMutation({
-		mutationFn: async (answer: { answer: Answer }) => {
-			let jsonAnswer = JSON.stringify(answer);
-			let res = await fetch(
-				"https://countries-backend.ahmed.systems/users/me/flags",
-				{
-					method: "PATCH",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					credentials: "include",
-					body: jsonAnswer,
-				},
-			);
-
-			if (!res.ok) {
-				console.log(await res.json());
-				throw new Error(res.statusText);
-			}
-
-			return res;
-		},
+		mutationFn: (answer: Answer) => doAddAnswer(answer),
 		onSuccess: () => userRefetch(),
 		onError: () =>
 			toast({
@@ -115,12 +73,10 @@ export function FlagsPage() {
 
 		// send data to server
 		mutation.mutate({
-			answer: {
-				flag: flagsData[lang][userData.flags.index].flag,
-				correctAnswer,
-				userAnswer,
-				isCorrect,
-			},
+			flag: flagsData[lang][userData.flags.index].flag,
+			correctAnswer,
+			userAnswer,
+			isCorrect,
 		});
 	};
 
@@ -139,7 +95,16 @@ export function FlagsPage() {
 		);
 	}
 
-	if (userError || !userData) navigate("/");
+	if (userError || !userData) {
+		return (
+			<Center flexDirection={"column"} gap={"4"}>
+				<Text>{t("You're not logged in")}</Text>
+				<Link to={"/"}>
+					<Button>{t("Go back")}</Button>
+				</Link>
+			</Center>
+		);
+	}
 
 	if (flagsError || userError || !flagsData || !userData) {
 		return <Text>Couldn't load anything</Text>;
