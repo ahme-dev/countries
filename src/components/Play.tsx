@@ -14,7 +14,6 @@ import {
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Answer } from "../types";
-import { PlayHistory } from "./PlayHistory";
 
 export function Play(props: {
 	country?: string;
@@ -41,6 +40,7 @@ export function Play(props: {
 			)}
 			direction={{ base: "column", sm: "row" }}
 			alignItems="center"
+			height={"fit-content"}
 			// overflow="hidden"
 			p={2}
 		>
@@ -79,6 +79,7 @@ export function Play(props: {
 								onClick={() => changeSelected(i)}
 								// using index as key id not optimal
 								key={i}
+								overflow={"hidden"}
 								borderColor={selected === i ? "purple.400" : "transparent"}
 								borderWidth={2}
 							>
@@ -89,13 +90,6 @@ export function Play(props: {
 					{/* Choices end */}
 
 					<Flex justifyContent={"center"} gap={2}>
-						{/* History */}
-						<PlayHistory
-							history={props.history}
-							clearHistory={props.clearHistory}
-						/>
-						{/* History end */}
-
 						{/* Answer button */}
 						<Button
 							w={"full"}

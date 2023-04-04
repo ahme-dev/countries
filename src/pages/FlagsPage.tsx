@@ -1,8 +1,16 @@
-import { Button, Center, Spinner, Text, useToast } from "@chakra-ui/react";
+import {
+	Button,
+	Center,
+	Flex,
+	Spinner,
+	Text,
+	useToast,
+} from "@chakra-ui/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { Play } from "../components/Play";
+import { Scores } from "../components/Scores";
 import { doAddAnswer, fetchFlags, fetchUser } from "../fetches";
 import { Answer } from "../types";
 
@@ -112,13 +120,20 @@ export function FlagsPage() {
 
 	if (true) {
 		return (
-			<Play
-				flag={flagsData[lang][userData.flags.index].flag}
-				variants={flagsData[lang][userData.flags.index].variants}
-				handleAnswer={handleAnswer}
-				history={userData.flags.answers}
-				clearHistory={() => {}}
-			/>
+			<Flex gap={4} alignItems={"center"}>
+				<Play
+					flag={flagsData[lang][userData.flags.index].flag}
+					variants={flagsData[lang][userData.flags.index].variants}
+					handleAnswer={handleAnswer}
+					history={userData.flags.answers}
+					clearHistory={() => {}}
+				/>
+				<Scores
+					index={userData.flags.index}
+					history={userData.flags.answers}
+					clearHistory={() => {}}
+				/>
+			</Flex>
 		);
 	}
 }
